@@ -117,7 +117,7 @@ void checkNumFilesInfolders() {  // reads SD card, returns number of files in ea
 
   if (initSent == false)  // if memory chest hasn't initialized (sensed # files in each folder)...
   {
-    for (byte i = 1; i <= totalNumFolders; i++)  // run through all the folders...
+    for (byte i = 1; i <= (totalNumFolders + 1); i++)  // run through all the folders...
     {
       sendSingleCommand(CMD_QUERY_FLDR_TRACKS, i);  //...and ask them how many files are inside.
       delay(100); // delay to give mp3 chip time to respond
@@ -139,7 +139,7 @@ void checkNumFilesInfolders() {  // reads SD card, returns number of files in ea
         delay(10);
         mp3.flush();
       }
-      for (byte x = 0; x < 18; x++) {
+      for (byte x = 0; x < (totalNumFolders); x++) {
         Serial.print(fileNumArray[x], DEC);
         Serial.print(" ");
       }
@@ -203,7 +203,7 @@ void loop() {
     }
 
     if (currentPhoneState == RINGING && (currentMillis - previousMillis > 7000)) { // randomize this value for varied ringing
-    
+
       currentPhoneState = READY_TO_PLAY_FOLDER;
 
       if (fullNumberSendBuffer == DIALNUM_RANDOM)
@@ -211,6 +211,8 @@ void loop() {
         int randomPhoneNum = random(0, (totalNumFolders - 1));
         fullNumberSendBuffer = phoneNumbers[randomPhoneNum];
         Serial.println(randomPhoneNum);
+        Serial.println(fullNumberSendBuffer);
+
       }
 
       if (fullNumberSendBuffer == DIALNUM_FOLDER_1) { // if FX var is in "play folder mode" AND dialed phone num is legit AND that number is for folder 1...
