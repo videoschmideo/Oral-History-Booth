@@ -18,7 +18,7 @@ void hookPressed() {
   Serial.println("Hook pressed.");
   hookIsUp = false;
   pulses = 0;
-  fxFile = 0;
+  currentPhoneState = 0;
   fullNumber = "";
   fullNumberSendBuffer = 0;
 

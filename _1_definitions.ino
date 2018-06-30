@@ -116,7 +116,7 @@ byte incomingByte; // incoming byte from mp3 player
 
 bool initSent = false; // checks to see if folders initialized
 int fileNumArray[totalNumFolders]; // holds array of # of files in each folder
-byte fxFile = 0; // variable to reflect which FX file is playing - (dial tone, ring tone, wrong number/busy signal, etc)
+byte currentPhoneState = 0; // variable to reflect which FX file is playing - (dial tone, ring tone, wrong number/busy signal, etc)
 
 bool wrongNumber = false; // toggles true if number dialed isn't in the list of allowable numbers
 

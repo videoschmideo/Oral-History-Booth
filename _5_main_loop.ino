@@ -164,9 +164,9 @@ void loop() {
   static bool doOnlyOnce = false; // corrects error on Mp3 chip that sends serial reply twice (only allows the first reply through)
 
   if (hookIsUp) { // if the hook is up...
-    if (fxFile == 0 && !playingAudio) // if audio isn't playing,
+    if (currentPhoneState == 0 && !playingAudio) // if audio isn't playing,
     {
-      fxFile = 1;   // set FX variable to "dial tone" status (1)
+      currentPhoneState = 1;   // set FX variable to "dial tone" status (1)
       sendCommand(CMD_PLAY_W_INDEX, 0, 1);    // play dial tone...
       Serial.println();
       Serial.println("dial tone");
@@ -177,11 +177,11 @@ void loop() {
 
     unsigned long currentMillis = millis(); // sets up timer for ringer
 
-    if (fxFile == 1 && (fullNumber.length() == numLength)) //.. if FX variable is 1 (dial tone) AND a legit phone number length has been dialed AND the hook is up...
+    if (currentPhoneState == 1 && (fullNumber.length() == numLength)) //.. if FX variable is 1 (dial tone) AND a legit phone number length has been dialed AND the hook is up...
     {
-      fxFile = 2; // then set FX variable to "play folder" status (2)
+      currentPhoneState = 2; // then set FX variable to "play folder" status (2)
       
-      if (fxFile == 2 && !wrongNumber) {
+      if (currentPhoneState == 2 && !wrongNumber) {
         Serial.println();
         Serial.println("ringing");
         Serial.println();
@@ -191,7 +191,7 @@ void loop() {
         //delay(delayTime); // give ringing a chance to happen
         previousMillis = currentMillis;
       }
-         else if (fxFile == 2 && wrongNumber) // if the phone is ringing... AND the number dialed is WRONG... AND the hook is up...
+         else if (currentPhoneState == 2 && wrongNumber) // if the phone is ringing... AND the number dialed is WRONG... AND the hook is up...
         {
           Serial.println();
           Serial.println("wrong number");
@@ -202,9 +202,9 @@ void loop() {
         }
       }
     
-    if (fxFile == 2 && (currentMillis - previousMillis > 7000)) { // randomize this value for varied ringing
+    if (currentPhoneState == 2 && (currentMillis - previousMillis > 7000)) { // randomize this value for varied ringing
 
-      fxFile = 3;
+      currentPhoneState = 3;
 
       if (fullNumberSendBuffer == DIALNUM_FOLDER_1) { // if FX var is in "play folder mode" AND dialed phone num is legit AND that number is for folder 1...
         folderNumber = 1;     // set folderNumber to this folder (only used when calling "folder" class - sends folder # info to class)
@@ -429,7 +429,7 @@ void loop() {
     playingAudio = 0;                 // tell the rest of the system there's no audio playing...
     folderNumber = 0;
     folderOpen = false;               // ...and that there are no folders are active.
-    fxFile = 0;
+    currentPhoneState = 0;
     Serial.println();
     Serial.println(F("all folders CLOSED!"));
     Serial.println();
