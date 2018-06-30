@@ -20,6 +20,11 @@
 #define hookPin 4
 #define pulsePin 3
 
+#define HUNG_UP 0
+#define DIAL_TONE 1
+#define RINGING 2
+#define READY_TO_PLAY_FILE 3
+
 
 /************ MP3 player Serial Command bytes **************************/
 
