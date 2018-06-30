@@ -23,7 +23,7 @@
 #define HUNG_UP 0
 #define DIAL_TONE 1
 #define RINGING 2
-#define READY_TO_PLAY_FILE 3
+#define READY_TO_PLAY_FOLDER 3
 
 
 /************ MP3 player Serial Command bytes **************************/
@@ -110,8 +110,8 @@ SoftwareSerial mp3(ARDUINO_RX, ARDUINO_TX);
 
 /*********** Variables for folder trigger/file logic***************/
 
-const byte folderMaxSize  = 18; // max # files allowed in a folder (ie, # of slots in each folder array)
-const int totalNumFolders = 10; // max # of folders
+const byte folderMaxSize  = 10; // max # files allowed in a folder (ie, # of slots in each folder array)
+const int totalNumFolders = 4; // max # of folders
 
 
 boolean folderOpen = false; // tracks if ANY folder is open
@@ -125,33 +125,14 @@ byte currentPhoneState = 0; // variable to reflect which FX file is playing - (d
 
 bool wrongNumber = false; // toggles true if number dialed isn't in the list of allowable numbers
 
-const int phoneNumbers[totalNumFolders] = {
+const int phoneNumbers[(totalNumFolders + 1)] = {
 DIALNUM_FOLDER_1,
 DIALNUM_FOLDER_2,
 DIALNUM_FOLDER_3,
 DIALNUM_FOLDER_4,
-DIALNUM_FOLDER_5,
-DIALNUM_FOLDER_6,
-DIALNUM_FOLDER_7,
-DIALNUM_FOLDER_8,
-DIALNUM_FOLDER_9,
-DIALNUM_FOLDER_10,
+DIALNUM_RANDOM
 };
 /*
-  /*****set "phone numbers" for folders here******
-  const byte PROGMEM  DIALNUM_FOLDER_1 = 1111;
-  const byte PROGMEM  DIALNUM_FOLDER_2 = 1112;
-  const byte PROGMEM  DIALNUM_FOLDER_3 = 1113;
-  const byte PROGMEM  DIALNUM_FOLDER_4 = 1114;
-  const byte PROGMEM  DIALNUM_FOLDER_5 = 1115;
-  const byte PROGMEM  DIALNUM_FOLDER_6 = 1116;
-  const byte PROGMEM  DIALNUM_FOLDER_7 = 1117;
-  const byte PROGMEM  DIALNUM_FOLDER_8 = 1118;
-  const byte PROGMEM  DIALNUM_FOLDER_9 = 1119;
-  const byte PROGMEM  DIALNUM_FOLDER_10 = 1110;
-
-*/
-
 
 
 

@@ -35,7 +35,7 @@ void setup()
   mp3.begin(9600);
   delay(500);
   sendCommand(CMD_SEL_DEV, 0, 0);
-  sendCommand(CMD_SET_VOLUME, 0, 18);
+  sendCommand(CMD_SET_VOLUME, 0, 16);
 
   delay(200);
   //  mcp.begin();  // initializes MPC port expansion chip. Uncomment to enable.
@@ -203,15 +203,14 @@ void loop() {
     }
 
     if (currentPhoneState == RINGING && (currentMillis - previousMillis > 7000)) { // randomize this value for varied ringing
-
-      currentPhoneState = READY_TO_PLAY_FILE;
+    
+      currentPhoneState = READY_TO_PLAY_FOLDER;
 
       if (fullNumberSendBuffer == DIALNUM_RANDOM)
       {
         int randomPhoneNum = random(0, (totalNumFolders - 1));
         fullNumberSendBuffer = phoneNumbers[randomPhoneNum];
         Serial.println(randomPhoneNum);
-
       }
 
       if (fullNumberSendBuffer == DIALNUM_FOLDER_1) { // if FX var is in "play folder mode" AND dialed phone num is legit AND that number is for folder 1...
