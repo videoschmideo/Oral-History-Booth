@@ -180,7 +180,7 @@ void loop() {
     if (currentPhoneState == DIAL_TONE && (fullNumber.length() == numLength)) //.. if FX variable is 1 (dial tone) AND a legit phone number length has been dialed AND the hook is up...
     {
       currentPhoneState = RINGING; // then set FX variable to "ringing" status (2)
-      
+
       if (currentPhoneState == RINGING && !wrongNumber) {
         Serial.println();
         Serial.println("ringing");
@@ -191,26 +191,26 @@ void loop() {
         //delay(delayTime); // give ringing a chance to happen
         previousMillis = currentMillis;
       }
-         else if (currentPhoneState == RINGING && wrongNumber) // if the phone is ringing... AND the number dialed is WRONG... AND the hook is up...
-        {
-          Serial.println();
-          Serial.println("wrong number");
-          Serial.println();
-          sendCommand(CMD_PLAY_W_INDEX, 0, 3);   // play operator error message
-          folderOpen = true;
-          playingAudio = true;
-        }
+      else if (currentPhoneState == RINGING && wrongNumber) // if the phone is ringing... AND the number dialed is WRONG... AND the hook is up...
+      {
+        Serial.println();
+        Serial.println("wrong number");
+        Serial.println();
+        sendCommand(CMD_PLAY_W_INDEX, 0, 3);   // play operator error message
+        folderOpen = true;
+        playingAudio = true;
       }
-    
+    }
+
     if (currentPhoneState == RINGING && (currentMillis - previousMillis > 7000)) { // randomize this value for varied ringing
 
       currentPhoneState = READY_TO_PLAY_FILE;
 
-        if (fullNumberSendBuffer == DIALNUM_RANDOM)
+      if (fullNumberSendBuffer == DIALNUM_RANDOM)
       {
         int randomPhoneNum = random(0, (totalNumFolders - 1));
-        fullNumberSendBuffer = randomPhoneNum;
-                 Serial.println(randomPhoneNum);
+        fullNumberSendBuffer = phoneNumbers[randomPhoneNum];
+        Serial.println(randomPhoneNum);
 
       }
 
