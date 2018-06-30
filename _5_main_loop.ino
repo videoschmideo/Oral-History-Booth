@@ -166,7 +166,7 @@ void loop() {
   if (hookIsUp) { // if the hook is up...
     if (currentPhoneState == HUNG_UP && !playingAudio) // if audio isn't playing,
     {
-      currentPhoneState = DIALTONE;   // set FX variable to "dial tone" status (1)
+      currentPhoneState = DIAL_TONE;   // set FX variable to "dial tone" status (1)
       sendCommand(CMD_PLAY_W_INDEX, 0, 1);    // play dial tone...
       Serial.println();
       Serial.println("dial tone");
@@ -177,7 +177,7 @@ void loop() {
 
     unsigned long currentMillis = millis(); // sets up timer for ringer
 
-    if (currentPhoneState == DIALTONE && (fullNumber.length() == numLength)) //.. if FX variable is 1 (dial tone) AND a legit phone number length has been dialed AND the hook is up...
+    if (currentPhoneState == DIAL_TONE && (fullNumber.length() == numLength)) //.. if FX variable is 1 (dial tone) AND a legit phone number length has been dialed AND the hook is up...
     {
       currentPhoneState = RINGING; // then set FX variable to "ringing" status (2)
       
@@ -205,6 +205,14 @@ void loop() {
     if (currentPhoneState == RINGING && (currentMillis - previousMillis > 7000)) { // randomize this value for varied ringing
 
       currentPhoneState = READY_TO_PLAY_FILE;
+
+        if (fullNumberSendBuffer == DIALNUM_RANDOM)
+      {
+        int randomPhoneNum = random(0, (totalNumFolders - 1));
+        fullNumberSendBuffer = randomPhoneNum;
+                 Serial.println(randomPhoneNum);
+
+      }
 
       if (fullNumberSendBuffer == DIALNUM_FOLDER_1) { // if FX var is in "play folder mode" AND dialed phone num is legit AND that number is for folder 1...
         folderNumber = 1;     // set folderNumber to this folder (only used when calling "folder" class - sends folder # info to class)

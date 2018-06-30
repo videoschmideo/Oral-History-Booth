@@ -24,4 +24,5 @@
 #define   DIALNUM_FOLDER_8   1108
 #define   DIALNUM_FOLDER_9   1109
 #define   DIALNUM_FOLDER_10  1010
+#define   DIALNUM_RANDOM  1211
 
