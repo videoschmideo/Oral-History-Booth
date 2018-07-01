@@ -10,13 +10,13 @@
 
 
 
-/*********MP3 player constants*********/
+  /*********MP3 player constants*********/
 //If using Arduino Pro Mini:
 #define ARDUINO_RX 5  //should connect to TX of the Serial MP3 Player module 
 #define ARDUINO_TX 6  //connect to RX of the module
 
 /**********Dialer Constants******/
-#define numLength 4
+#define numLength 7
 #define hookPin 4
 #define pulsePin 3
 
@@ -72,9 +72,10 @@
 
 /************variables for timer/delay**************/
 
-long previousMillis = 0; 
-int delayTime = 3500; 
-
+long previousMillis = 0;
+int ringerMinDelay = 3; // in whole seconds
+int ringerMaxDelay = 8; // in whole seconds
+int ringerDelay = 0;
 /************variables for dialer control**************/
 
 
@@ -91,7 +92,7 @@ bool hookIsUp = false;
 bool formerHookState = false;
 
 String fullNumber = ""; //  holds several previously dialed single numbers in one string
-word fullNumberSendBuffer = 0; // holds full number once numLength reached
+long fullNumberSendBuffer = 0; // holds full number once numLength reached
 
 byte currentNumber = 0; // holds number just dialed on rotary phone
 
@@ -122,16 +123,16 @@ byte incomingByte; // incoming byte from mp3 player
 
 bool initSent = false; // checks to see if folders initialized
 int fileNumArray[totalNumFolders]; // holds array of # of files in each folder
-byte currentPhoneState = 0; // variable to reflect which FX file is playing - (dial tone, ring tone, wrong number/busy signal, etc)
+int currentPhoneState = 0; // variable to reflect which FX file is playing - (dial tone, ring tone, wrong number/busy signal, etc)
 
 bool wrongNumber = false; // toggles true if number dialed isn't in the list of allowable numbers
 
-const int phoneNumbers[(totalNumFolders + 1)] = {
-DIALNUM_FOLDER_1,
-DIALNUM_FOLDER_2,
-DIALNUM_FOLDER_3,
-DIALNUM_FOLDER_4,
-DIALNUM_RANDOM
+const long phoneNumbers[(totalNumFolders + 1)] = {
+  DIALNUM_FOLDER_1,
+  DIALNUM_FOLDER_2,
+  DIALNUM_FOLDER_3,
+  DIALNUM_FOLDER_4,
+  DIALNUM_RANDOM
 };
 
 
@@ -189,14 +190,14 @@ byte folder20size;
 const word PROGMEM folder1array[folderMaxSize];
 const word PROGMEM folder2array[folderMaxSize];
 const word PROGMEM folder3array[folderMaxSize];
-  const word PROGMEM folder4array[folderMaxSize];
-  const word PROGMEM folder5array[folderMaxSize];
-  const word PROGMEM folder6array[folderMaxSize];
-  const word PROGMEM folder7array[folderMaxSize];
-  const word PROGMEM folder8array[folderMaxSize];
-  const word PROGMEM folder9array[folderMaxSize];
-  const word PROGMEM folder10array[folderMaxSize];
- /* const word PROGMEM folder11array[folderMaxSize];
+const word PROGMEM folder4array[folderMaxSize];
+const word PROGMEM folder5array[folderMaxSize];
+const word PROGMEM folder6array[folderMaxSize];
+const word PROGMEM folder7array[folderMaxSize];
+const word PROGMEM folder8array[folderMaxSize];
+const word PROGMEM folder9array[folderMaxSize];
+const word PROGMEM folder10array[folderMaxSize];
+/* const word PROGMEM folder11array[folderMaxSize];
   const word PROGMEM folder12array[folderMaxSize];
   const word PROGMEM folder13array[folderMaxSize];
   const word PROGMEM folder14array[folderMaxSize];

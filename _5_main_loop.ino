@@ -151,9 +151,15 @@ void checkNumFilesInfolders() {  // reads SD card, returns number of files in ea
   }
 }
 
+void setRandomDelayTime (){
+        int randomDelayNum = random(ringerMinDelay, ringerMaxDelay);
+        ringerDelay = (randomDelayNum * 1000);
+              Serial.println(ringerDelay);
 
+      }
 
 void loop() {
+
 
   unsigned long currentMillis = millis(); // sets up timer for ringer
 
@@ -195,6 +201,7 @@ void loop() {
         Serial.println();
         Serial.println("ringing");
         Serial.println();
+        setRandomDelayTime();
         sendCommand(CMD_PLAY_W_INDEX, 0, 2);    // play ringing tone...
         folderOpen = true;
         playingAudio = true;
@@ -202,8 +209,9 @@ void loop() {
         previousMillis = currentMillis;
       }
     }
-
-    if (currentPhoneState == RINGING && (currentMillis - previousMillis > 7000)) { // randomize this value for varied ringing
+  
+ 
+    if (currentPhoneState == RINGING && (currentMillis - previousMillis > ringerDelay)) { // randomize this value for varied ringing
 
       currentPhoneState = READY_TO_PLAY_FOLDER;
 

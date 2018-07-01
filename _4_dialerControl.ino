@@ -56,11 +56,8 @@ void combinePhoneDigits() {
     if ((fullNumber.length() == numLength) && hookIsUp == true) // checks to see if string "fullNumber" is  longer than phone num length
     {
       fullNumberSendBuffer = fullNumber.toInt();
-      Serial.print("FullNumSendBuffer: ");
+      Serial.print("FullNumberSendBuffer: ");
       Serial.println(fullNumberSendBuffer);
-      //      if (hookIsUp == false) {
-      //      fullNumber = "";
-      //  }
     }
   }
 }
