@@ -11,7 +11,8 @@ class Folder
     //  int arrayMaxSize;     // placeholder for max folder array size, as assigned in class def;
     int *arrPass;     // passes folder array pointer between functions
     byte folderNumber; // keeps track of folder number assigned in class def
-
+    int folderSize; // tracks size of folders (# files in each)
+    
     byte arraySlot; // keeps track of slots in array (to let us cycle through array incrementally)
     int buttonCounter; // counts # times folder is opened
 
@@ -20,10 +21,11 @@ class Folder
     // Constructor - creates a "Drawer" and initializes the member variables and state
 
   public:
-    Folder(int *arrPtr, byte fldrNum) // defines inputs to class
+    Folder(int *arrPtr, byte fldrNum, int fldrSize) // defines inputs to class
     {
       arrPass = arrPtr;
       folderNumber = fldrNum;
+      folderSize = fldrSize;
       buttonCounter = 0; // counts # times switch is triggered'
     }
 
@@ -77,6 +79,7 @@ class Folder
         Serial.print(F("file: "));
         Serial.println(fileNumber);  
          playing = true;
+        allPlayedChecker(folderSize);
     }
 
  

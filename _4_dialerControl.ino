@@ -56,11 +56,8 @@ void combinePhoneDigits() {
     if ((fullNumber.length() == numLength) && hookIsUp == true) // checks to see if string "fullNumber" is  longer than phone num length
     {
       fullNumberSendBuffer = fullNumber.toInt();
-      Serial.print("FullNumSendBuffer: ");
+      Serial.print("FullNumberSendBuffer: ");
       Serial.println(fullNumberSendBuffer);
-      //      if (hookIsUp == false) {
-      //      fullNumber = "";
-      //  }
     }
   }
 }
@@ -110,7 +107,7 @@ void readRotaryDial()
 
 
 void wrongNumberChecker() {
-  for (byte x = 0; x < (totalNumFolders +1); x++) {
+  for (byte x = 0; x < (totalNumFolders + 1); x++) {
     if (fullNumberSendBuffer != phoneNumbers[x]) {
       wrongNumber = true;
     } else {
@@ -118,8 +115,18 @@ void wrongNumberChecker() {
       return;
     }
   }
-}
+ for (byte x = 0; x < (totalNumFolders + 1); x++) {
+    if (fullNumberSendBuffer = phoneNumbers[x]) {
+      tempNumBuffer = fullNunberSendBuffer;
+      
+    }
+  }
+ }
 
+
+void numberChecker(){
+  for byte x = 0
+}
 
 bool fileDone() {  // checks if file is done playing
   if (ansbuf[3] == 0x3d) {

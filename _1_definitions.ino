@@ -10,7 +10,7 @@
 
 
 
-/*********MP3 player constants*********/
+  /*********MP3 player constants*********/
 //If using Arduino Pro Mini:
 #define ARDUINO_RX 5  //should connect to TX of the Serial MP3 Player module 
 #define ARDUINO_TX 6  //connect to RX of the module
@@ -72,12 +72,13 @@
 
 /************variables for timer/delay**************/
 
-long previousMillis = 0; 
-int delayTime = 3500; 
-
+long previousMillis = 0;
+int ringerMinDelay = 3; // in whole seconds
+int ringerMaxDelay = 8; // in whole seconds
+int ringerDelay = 0;
 /************variables for dialer control**************/
 
-
+long tempNumBuffer = 0; // holds phone number temporarily
 bool readyToSendNum = 0;
 bool trueState = LOW; // counts number of pulses only on leading edge of pulse
 bool lastState = LOW; // compares current state of pulse (high or low) to last state to find edge
@@ -91,7 +92,7 @@ bool hookIsUp = false;
 bool formerHookState = false;
 
 String fullNumber = ""; //  holds several previously dialed single numbers in one string
-word fullNumberSendBuffer = 0; // holds full number once numLength reached
+long fullNumberSendBuffer = 0; // holds full number once numLength reached
 
 byte currentNumber = 0; // holds number just dialed on rotary phone
 
@@ -122,16 +123,16 @@ byte incomingByte; // incoming byte from mp3 player
 
 bool initSent = false; // checks to see if folders initialized
 int fileNumArray[totalNumFolders]; // holds array of # of files in each folder
-byte currentPhoneState = 0; // variable to reflect which FX file is playing - (dial tone, ring tone, wrong number/busy signal, etc)
+int currentPhoneState = 0; // variable to reflect which FX file is playing - (dial tone, ring tone, wrong number/busy signal, etc)
 
 bool wrongNumber = false; // toggles true if number dialed isn't in the list of allowable numbers
 
-const int phoneNumbers[(totalNumFolders + 1)] = {
-DIALNUM_FOLDER_1,
-DIALNUM_FOLDER_2,
-DIALNUM_FOLDER_3,
-DIALNUM_FOLDER_4,
-DIALNUM_RANDOM
+const long phoneNumbers[(totalNumFolders + 1)] = {
+  DIALNUM_FOLDER_1,
+  DIALNUM_FOLDER_2,
+  DIALNUM_FOLDER_3,
+  DIALNUM_FOLDER_4,
+  DIALNUM_RANDOM
 };
 
 
@@ -143,23 +144,24 @@ const byte PROGMEM folder1num = 1;
 const byte PROGMEM folder2num = 2;
 const byte PROGMEM folder3num = 3;
 const byte PROGMEM folder4num = 4;
-const byte PROGMEM folder5num = 5;
-const byte PROGMEM folder6num = 6;
-const byte PROGMEM folder7num = 7;
-const byte PROGMEM folder8num = 8;
-const byte PROGMEM folder9num = 9;
-const byte PROGMEM folder10num = 10;
-const byte PROGMEM folder11num = 11;
-const byte PROGMEM folder12num = 12;
-const byte PROGMEM folder13num = 13;
-const byte PROGMEM folder14num = 14;
-const byte PROGMEM folder15num = 15;
-const byte PROGMEM folder16num = 16;
-const byte PROGMEM folder17num = 17;
-const byte PROGMEM folder18num = 18;
-const byte PROGMEM folder19num = 19;
-const byte PROGMEM folder20num = 20;
-
+/*
+  const byte PROGMEM folder5num = 5;
+  const byte PROGMEM folder6num = 6;
+  const byte PROGMEM folder7num = 7;
+  const byte PROGMEM folder8num = 8;
+  const byte PROGMEM folder9num = 9;
+  const byte PROGMEM folder10num = 10;
+  const byte PROGMEM folder11num = 11;
+  const byte PROGMEM folder12num = 12;
+  const byte PROGMEM folder13num = 13;
+  const byte PROGMEM folder14num = 14;
+  const byte PROGMEM folder15num = 15;
+  const byte PROGMEM folder16num = 16;
+  const byte PROGMEM folder17num = 17;
+  const byte PROGMEM folder18num = 18;
+  const byte PROGMEM folder19num = 19;
+  const byte PROGMEM folder20num = 20;
+*/
 
 //define number of files in each folder here
 // sets # of files in each folder (up to existing max limit), sends value to instances of "folder" class objects
@@ -167,36 +169,38 @@ byte folder1size;
 byte folder2size;
 byte folder3size;
 byte folder4size;
-byte folder5size;
-byte folder6size;
-byte folder7size;
-byte folder8size;
-byte folder9size;
-byte folder10size;
-byte folder11size;
-byte folder12size;
-byte folder13size;
-byte folder14size;
-byte folder15size;
-byte folder16size;
-byte folder17size;
-byte folder18size;
-byte folder19size;
-byte folder20size;
-
+/*
+  byte folder5size;
+  byte folder6size;
+  byte folder7size;
+  byte folder8size;
+  byte folder9size;
+  byte folder10size;
+  byte folder11size;
+  byte folder12size;
+  byte folder13size;
+  byte folder14size;
+  byte folder15size;
+  byte folder16size;
+  byte folder17size;
+  byte folder18size;
+  byte folder19size;
+  byte folder20size;
+*/
 
 // create variables for array, size, folder state here. Need one for each folder.
 const word PROGMEM folder1array[folderMaxSize];
 const word PROGMEM folder2array[folderMaxSize];
 const word PROGMEM folder3array[folderMaxSize];
-  const word PROGMEM folder4array[folderMaxSize];
+const word PROGMEM folder4array[folderMaxSize];
+/*
   const word PROGMEM folder5array[folderMaxSize];
   const word PROGMEM folder6array[folderMaxSize];
   const word PROGMEM folder7array[folderMaxSize];
   const word PROGMEM folder8array[folderMaxSize];
   const word PROGMEM folder9array[folderMaxSize];
   const word PROGMEM folder10array[folderMaxSize];
- /* const word PROGMEM folder11array[folderMaxSize];
+  const word PROGMEM folder11array[folderMaxSize];
   const word PROGMEM folder12array[folderMaxSize];
   const word PROGMEM folder13array[folderMaxSize];
   const word PROGMEM folder14array[folderMaxSize];
