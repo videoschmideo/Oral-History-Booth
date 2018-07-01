@@ -22,8 +22,9 @@
 
 #define HUNG_UP 0
 #define DIAL_TONE 1
-#define RINGING 2
-#define READY_TO_PLAY_FOLDER 3
+#define CHECKING_NUMBER 2
+#define RINGING 3
+#define READY_TO_PLAY_FOLDER 4
 
 
 /************ MP3 player Serial Command bytes **************************/

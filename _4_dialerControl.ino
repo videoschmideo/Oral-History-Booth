@@ -110,7 +110,7 @@ void readRotaryDial()
 
 
 void wrongNumberChecker() {
-  for (byte x = 0; x < totalNumFolders; x++) {
+  for (byte x = 0; x < (totalNumFolders +1); x++) {
     if (fullNumberSendBuffer != phoneNumbers[x]) {
       wrongNumber = true;
     } else {

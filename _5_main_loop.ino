@@ -179,9 +179,19 @@ void loop() {
 
     if (currentPhoneState == DIAL_TONE && (fullNumber.length() == numLength)) //.. if FX variable is 1 (dial tone) AND a legit phone number length has been dialed AND the hook is up...
     {
-      currentPhoneState = RINGING; // then set FX variable to "ringing" status (2)
+      currentPhoneState = RINGING;
 
-      if (currentPhoneState == RINGING && !wrongNumber) {
+      if (currentPhoneState == RINGING && wrongNumber) {
+        Serial.println();
+        Serial.println("wrong number");
+        Serial.println();
+        sendCommand(CMD_PLAY_W_INDEX, 0, 3);   // play operator error message
+        folderOpen = true;
+        playingAudio = true;
+
+      }
+      else if (currentPhoneState == RINGING && !wrongNumber) // if the phone is ringing... AND the number dialed is correct...
+      {
         Serial.println();
         Serial.println("ringing");
         Serial.println();
@@ -191,28 +201,17 @@ void loop() {
         //delay(delayTime); // give ringing a chance to happen
         previousMillis = currentMillis;
       }
-      else if (currentPhoneState == RINGING && wrongNumber) // if the phone is ringing... AND the number dialed is WRONG... AND the hook is up...
-      {
-        Serial.println();
-        Serial.println("wrong number");
-        Serial.println();
-        sendCommand(CMD_PLAY_W_INDEX, 0, 3);   // play operator error message
-        folderOpen = true;
-        playingAudio = true;
-      }
     }
 
     if (currentPhoneState == RINGING && (currentMillis - previousMillis > 7000)) { // randomize this value for varied ringing
 
       currentPhoneState = READY_TO_PLAY_FOLDER;
 
-      if (fullNumberSendBuffer == DIALNUM_RANDOM)
-      {
+      if (fullNumberSendBuffer == DIALNUM_RANDOM) {
         int randomPhoneNum = random(0, (totalNumFolders - 1));
         fullNumberSendBuffer = phoneNumbers[randomPhoneNum];
         Serial.println(randomPhoneNum);
         Serial.println(fullNumberSendBuffer);
-
       }
 
       if (fullNumberSendBuffer == DIALNUM_FOLDER_1) { // if FX var is in "play folder mode" AND dialed phone num is legit AND that number is for folder 1...
@@ -252,164 +251,7 @@ void loop() {
       }
     }
   }
-  /*
-        if (!playingAudio && fullNumberSendBuffer == DIALNUM_FOLDER_5)
-        {
-          fullNumberSendBuffer = 0;
-          folderNumber = 5;
-          folderOpen = true;
-          folder5.play();
-          playingAudio = true;
-          folder5.allPlayedChecker(folder5size);
-        }
 
-        if (!playingAudio && fullNumberSendBuffer == DIALNUM_FOLDER_6)
-        {
-          fullNumberSendBuffer = 0;
-          folderNumber = 6;
-          folderOpen = true;
-          folder6.play();
-          playingAudio = true;
-          folder6.allPlayedChecker(folder6size);
-        }
-        if (!playingAudio && fullNumberSendBuffer == DIALNUM_FOLDER_7)
-        {
-          fullNumberSendBuffer = 0;
-          folderNumber = 7;
-          folderOpen = true;
-          folder7.play();
-          playingAudio = true;
-          folder7.allPlayedChecker(folder7size);
-        }
-
-        if (!playingAudio && fullNumberSendBuffer == DIALNUM_FOLDER_8)
-        {
-          fullNumberSendBuffer = 0;
-          folderNumber = 8;
-          folderOpen = true;
-          folder8.play();
-          playingAudio = true;
-          folder8.allPlayedChecker(folder8size);
-        }
-
-        if (!playingAudio && fullNumberSendBuffer == DIALNUM_FOLDER_9)
-        {
-          fullNumberSendBuffer = 0;
-          folderNumber = 9;
-          folderOpen = true;
-          folder9.play();
-          playingAudio = true;
-          folder9.allPlayedChecker(folder9size);
-        }
-
-        if (!playingAudio && fullNumberSendBuffer == DIALNUM_FOLDER_10)
-        {
-          fullNumberSendBuffer = 0;
-          folderNumber = 10;
-          folderOpen = true;
-          folder10.play();
-          playingAudio = true;
-          folder10.allPlayedChecker(folder10size);
-        }
-
-        if (!playingAudio && fullNumberSendBuffer == DIALNUM_FOLDER_11)
-        {
-          fullNumberSendBuffer = 0;
-          folderNumber = 11;
-          folderOpen = true;
-          folder11.play();
-          playingAudio = true;
-          folder11.allPlayedChecker(folder11size);
-        }
-
-        if (!playingAudio && fullNumberSendBuffer == DIALNUM_FOLDER_12)
-        {
-          fullNumberSendBuffer = 0;
-          folderNumber = 12;
-          folderOpen = true;
-          folder12.play();
-          playingAudio = true;
-          folder12.allPlayedChecker(folder12size);
-        }
-
-        if (!playingAudio && fullNumberSendBuffer == DIALNUM_FOLDER_13)
-        {
-          fullNumberSendBuffer = 0;
-          folderNumber = 13;
-          folderOpen = true;
-          folder13.play();
-          playingAudio = true;
-          folder13.allPlayedChecker(folder13size);
-        }
-
-        if (!playingAudio && fullNumberSendBuffer == DIALNUM_FOLDER_14)
-        {
-          fullNumberSendBuffer = 0;
-          folderNumber = 14;
-          folderOpen = true;
-          folder14.play();
-          playingAudio = true;
-          folder14.allPlayedChecker(folder14size);
-        }
-
-        if (!playingAudio && fullNumberSendBuffer == DIALNUM_FOLDER_15)
-        {
-          fullNumberSendBuffer = 0;
-          folderNumber = 15;
-          folderOpen = true;
-          folder15.play();
-          playingAudio = true;
-          folder15.allPlayedChecker(folder15size);
-        }
-        if (!playingAudio && fullNumberSendBuffer == DIALNUM_FOLDER_16)
-        {
-          fullNumberSendBuffer = 0;
-          folderNumber = 16;
-          folderOpen = true;
-          folder16.play();
-          playingAudio = true;
-          folder16.allPlayedChecker(folder16size);
-        }
-        if (!playingAudio && fullNumberSendBuffer == DIALNUM_FOLDER_17)
-        {
-          fullNumberSendBuffer = 0;
-          folderNumber = 17;
-          folderOpen = true;
-          folder17.play();
-          playingAudio = true;
-          folder17.allPlayedChecker(folder17size);
-        }
-
-
-          if (!playingAudio && fullNumberSendBuffer == DIALNUM_FOLDER_18)
-          {
-          fullNumberSendBuffer = 0;
-          folderNumber = 18;
-          folderOpen = true;
-          folder18.play();
-          playingAudio = true;
-          folder18.allPlayedChecker(folder18size);
-          }
-
-          if (!playingAudio && fullNumberSendBuffer == DIALNUM_FOLDER_19)
-          {
-          fullNumberSendBuffer = 0;
-          folderNumber = 19;
-          folderOpen = true;
-          folder19.play();
-          playingAudio = true;
-          folder19.allPlayedChecker(folder19size);
-          }
-          if (!playingAudio && fullNumberSendBuffer == DIALNUM_FOLDER_20)
-          {
-          fullNumberSendBuffer = 0;
-          folderNumber = 20;
-          folderOpen = true;
-          folder20.play();
-          playingAudio = true;
-          folder20.allPlayedChecker(folder15size);
-          }
-  */
 
 
   if (mp3.available()) // Checks for reply from mp3 player when player is queried
