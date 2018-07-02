@@ -22,10 +22,10 @@ Folder folder19(folder19array, folder19num);
 Folder folder20(folder20array, folder20num);
 Folder folder21(folder21array, folder21num);
 Folder folder22(folder22array, folder22num);
-Folder folder23(folder23array, folder23num);
+/*Folder folder23(folder23array, folder23num);
 Folder folder24(folder24array, folder24num);
 Folder folder25(folder25array, folder25num);
-
+*/
 
 
 void setup()
@@ -75,21 +75,21 @@ void setup()
   folder10size = fileNumArray[9];
   folder11size = fileNumArray[10];
   folder12size = fileNumArray[11];
-    folder13size = fileNumArray[12];
-    folder14size = fileNumArray[13];
-    folder15size = fileNumArray[14];
-    folder15size = fileNumArray[15];
-    folder16size = fileNumArray[16];
-    folder17size = fileNumArray[17];
-    folder18size = fileNumArray[18];
-    folder19size = fileNumArray[19];
-    folder20size = fileNumArray[20];
-    folder21size = fileNumArray[21];
-    folder22size = fileNumArray[22];
-    folder23size = fileNumArray[23];
-    folder24size = fileNumArray[24];
-    folder25size = fileNumArray[25];
- 
+  folder13size = fileNumArray[12];
+  folder14size = fileNumArray[13];
+  folder15size = fileNumArray[14];
+  folder15size = fileNumArray[15];
+  folder16size = fileNumArray[16];
+  folder17size = fileNumArray[17];
+  folder18size = fileNumArray[18];
+  folder19size = fileNumArray[19];
+  folder20size = fileNumArray[20];
+  folder21size = fileNumArray[21];
+  folder22size = fileNumArray[22];
+  folder23size = fileNumArray[23];
+  folder24size = fileNumArray[24];
+  folder25size = fileNumArray[25];
+
 
   //  Serial.println();
   folder1.shuffle(folder1size);
@@ -103,21 +103,22 @@ void setup()
   folder9.shuffle(folder9size);
   folder10.shuffle(folder10size);
   folder11.shuffle(folder11size);
-    folder12.shuffle(folder12size);
-    folder13.shuffle(folder13size);
-    folder14.shuffle(folder14size);
-    folder15.shuffle(folder15size);
-    folder16.shuffle(folder16size);
-    folder17.shuffle(folder17size);
-    folder18.shuffle(folder18size);
-    folder19.shuffle(folder19size);
-    folder20.shuffle(folder20size);
-    folder21.shuffle(folder21size);
-    folder22.shuffle(folder22size);
-    folder23.shuffle(folder23size);
-    folder24.shuffle(folder24size);
-    folder25.shuffle(folder25size);
+  folder12.shuffle(folder12size);
+  folder13.shuffle(folder13size);
+  folder14.shuffle(folder14size);
+  folder15.shuffle(folder15size);
+  folder16.shuffle(folder16size);
+  folder17.shuffle(folder17size);
+  folder18.shuffle(folder18size);
+  folder19.shuffle(folder19size);
+  folder20.shuffle(folder20size);
+  folder21.shuffle(folder21size);
+  folder22.shuffle(folder22size);
   
+  /*folder23.shuffle(folder23size);
+  folder24.shuffle(folder24size);
+  folder25.shuffle(folder25size);
+*/
 
   Serial.println();
   Serial.println(F("***** READY! *****"));
@@ -283,10 +284,182 @@ void loop() {
         playingAudio = true;
         folder4.allPlayedChecker(folder4size);
 
+        if (!playingAudio && fullNumberSendBuffer == DIALNUM_FOLDER_5)
+        {
+          fullNumberSendBuffer = 0;
+          folderNumber = 5;
+          folderOpen = true;
+          folder5.play();
+          playingAudio = true;
+          folder5.allPlayedChecker(folder5size);
+        }
+
+        if (!playingAudio && fullNumberSendBuffer == DIALNUM_FOLDER_6)
+        {
+          fullNumberSendBuffer = 0;
+          folderNumber = 6;
+          folderOpen = true;
+          folder6.play();
+          playingAudio = true;
+          folder6.allPlayedChecker(folder6size);
+        }
+        if (!playingAudio && fullNumberSendBuffer == DIALNUM_FOLDER_7)
+        {
+          fullNumberSendBuffer = 0;
+          folderNumber = 7;
+          folderOpen = true;
+          folder7.play();
+          playingAudio = true;
+          folder7.allPlayedChecker(folder7size);
+        }
+
+        if (!playingAudio && fullNumberSendBuffer == DIALNUM_FOLDER_8)
+        {
+          fullNumberSendBuffer = 0;
+          folderNumber = 8;
+          folderOpen = true;
+          folder8.play();
+          playingAudio = true;
+          folder8.allPlayedChecker(folder8size);
+        }
+
+        if (!playingAudio && fullNumberSendBuffer == DIALNUM_FOLDER_9)
+        {
+          fullNumberSendBuffer = 0;
+          folderNumber = 9;
+          folderOpen = true;
+          folder9.play();
+          playingAudio = true;
+          folder9.allPlayedChecker(folder9size);
+        }
+
+        if (!playingAudio && fullNumberSendBuffer == DIALNUM_FOLDER_10)
+        {
+          fullNumberSendBuffer = 0;
+          folderNumber = 10;
+          folderOpen = true;
+          folder10.play();
+          playingAudio = true;
+          folder10.allPlayedChecker(folder10size);
+        }
+
+        if (!playingAudio && fullNumberSendBuffer == DIALNUM_FOLDER_11)
+        {
+          fullNumberSendBuffer = 0;
+          folderNumber = 11;
+          folderOpen = true;
+          folder11.play();
+          playingAudio = true;
+          folder11.allPlayedChecker(folder11size);
+        }
+
+        if (!playingAudio && fullNumberSendBuffer == DIALNUM_FOLDER_12)
+        {
+          fullNumberSendBuffer = 0;
+          folderNumber = 12;
+          folderOpen = true;
+          folder12.play();
+          playingAudio = true;
+          folder12.allPlayedChecker(folder12size);
+        }
+
+        if (!playingAudio && fullNumberSendBuffer == DIALNUM_FOLDER_13)
+        {
+          fullNumberSendBuffer = 0;
+          folderNumber = 13;
+          folderOpen = true;
+          folder13.play();
+          playingAudio = true;
+          folder13.allPlayedChecker(folder13size);
+        }
+
+        if (!playingAudio && fullNumberSendBuffer == DIALNUM_FOLDER_14)
+        {
+          fullNumberSendBuffer = 0;
+          folderNumber = 14;
+          folderOpen = true;
+          folder14.play();
+          playingAudio = true;
+          folder14.allPlayedChecker(folder14size);
+        }
+
+        if (!playingAudio && fullNumberSendBuffer == DIALNUM_FOLDER_15)
+        {
+          fullNumberSendBuffer = 0;
+          folderNumber = 15;
+          folderOpen = true;
+          folder15.play();
+          playingAudio = true;
+          folder15.allPlayedChecker(folder15size);
+        }
+        if (!playingAudio && fullNumberSendBuffer == DIALNUM_FOLDER_16)
+        {
+          fullNumberSendBuffer = 0;
+          folderNumber = 16;
+          folderOpen = true;
+          folder16.play();
+          playingAudio = true;
+          folder16.allPlayedChecker(folder16size);
+        }
+        if (!playingAudio && fullNumberSendBuffer == DIALNUM_FOLDER_17)
+        {
+          fullNumberSendBuffer = 0;
+          folderNumber = 17;
+          folderOpen = true;
+          folder17.play();
+          playingAudio = true;
+          folder17.allPlayedChecker(folder17size);
+        }
 
 
+        if (!playingAudio && fullNumberSendBuffer == DIALNUM_FOLDER_18)
+        {
+          fullNumberSendBuffer = 0;
+          folderNumber = 18;
+          folderOpen = true;
+          folder18.play();
+          playingAudio = true;
+          folder18.allPlayedChecker(folder18size);
+        }
 
-        
+        if (!playingAudio && fullNumberSendBuffer == DIALNUM_FOLDER_19)
+        {
+          fullNumberSendBuffer = 0;
+          folderNumber = 19;
+          folderOpen = true;
+          folder19.play();
+          playingAudio = true;
+          folder19.allPlayedChecker(folder19size);
+        }
+        if (!playingAudio && fullNumberSendBuffer == DIALNUM_FOLDER_20)
+        {
+          fullNumberSendBuffer = 0;
+          folderNumber = 20;
+          folderOpen = true;
+          folder20.play();
+          playingAudio = true;
+          folder20.allPlayedChecker(folder20size);
+        }
+  if (!playingAudio && fullNumberSendBuffer == DIALNUM_FOLDER_21)
+        {
+          fullNumberSendBuffer = 0;
+          folderNumber = 21;
+          folderOpen = true;
+          folder21.play();
+          playingAudio = true;
+          folder21.allPlayedChecker(folder21size);
+        }
+
+  if (!playingAudio && fullNumberSendBuffer == DIALNUM_FOLDER_22)
+        {
+          fullNumberSendBuffer = 0;
+          folderNumber = 22;
+          folderOpen = true;
+          folder22.play();
+          playingAudio = true;
+          folder22.allPlayedChecker(folder20size);
+        }
+
       }
     }
   }
