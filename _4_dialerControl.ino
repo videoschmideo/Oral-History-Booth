@@ -6,7 +6,7 @@
 */
 
 void hookReleased() {
-  Serial.println("Hook released.");
+  Serial.println(F("Hook released."));
   Serial.println();
   fullNumber = "";
   hookIsUp = true;
@@ -15,7 +15,7 @@ void hookReleased() {
 }
 
 void hookPressed() {
-  Serial.println("Hook pressed.");
+  Serial.println(F("Hook pressed."));
   hookIsUp = false;
   pulses = 0;
   currentPhoneState = 0;
@@ -56,7 +56,7 @@ void combinePhoneDigits() {
     if ((fullNumber.length() == numLength) && hookIsUp == true) // checks to see if string "fullNumber" is  longer than phone num length
     {
       fullNumberSendBuffer = fullNumber.toInt();
-      Serial.print("FullNumberSendBuffer: ");
+      Serial.print(F("FullNumberSendBuffer: "));
       Serial.println(fullNumberSendBuffer);
     }
   }

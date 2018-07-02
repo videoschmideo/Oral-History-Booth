@@ -56,7 +56,7 @@ class Folder
       for (byte a = 0; a < numFiles; a++) {
 
              Serial.print(arrPass[a] + 1);
-             Serial.print(" ");
+             Serial.print(F(" "));
         if (a == (numFiles)) {
                 Serial.println();
            delay(500);
@@ -71,8 +71,8 @@ class Folder
       sendCommand(CMD_PLAY_FOLDER_FILE, folderNumber, fileNumber);
 
       //Uncomment for Debugging
-      Serial.println("PLAYING");
-        Serial.print("folder: ");
+      Serial.println(F("PLAYING"));
+        Serial.print(F("folder: "));
         Serial.println(folderNumber);
         Serial.print(F("file: "));
         Serial.println(fileNumber);  

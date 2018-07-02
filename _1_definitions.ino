@@ -112,9 +112,6 @@ SoftwareSerial mp3(ARDUINO_RX, ARDUINO_TX);
 
 /*********** Variables for folder trigger/file logic***************/
 
-const byte folderMaxSize  = 10; // max # files allowed in a folder (ie, # of slots in each folder array)
-const int totalNumFolders = 4; // max # of folders
-
 
 boolean folderOpen = false; // tracks if ANY folder is open
 byte folderNumber; // allows feedback on which folder is open (for debugging)
@@ -160,6 +157,11 @@ const byte PROGMEM folder17num = 17;
 const byte PROGMEM folder18num = 18;
 const byte PROGMEM folder19num = 19;
 const byte PROGMEM folder20num = 20;
+const byte PROGMEM folder21num = 21;
+const byte PROGMEM folder22num = 22;
+const byte PROGMEM folder23num = 23;
+const byte PROGMEM folder24num = 24;
+const byte PROGMEM folder25num = 25;
 
 
 //define number of files in each folder here
@@ -184,7 +186,11 @@ byte folder17size;
 byte folder18size;
 byte folder19size;
 byte folder20size;
-
+byte folder21size;
+byte folder22size;
+byte folder23size;
+byte folder24size;
+byte folder25size;
 
 // create variables for array, size, folder state here. Need one for each folder.
 const word PROGMEM folder1array[folderMaxSize];
@@ -197,16 +203,20 @@ const word PROGMEM folder7array[folderMaxSize];
 const word PROGMEM folder8array[folderMaxSize];
 const word PROGMEM folder9array[folderMaxSize];
 const word PROGMEM folder10array[folderMaxSize];
-/* const word PROGMEM folder11array[folderMaxSize];
-  const word PROGMEM folder12array[folderMaxSize];
-  const word PROGMEM folder13array[folderMaxSize];
-  const word PROGMEM folder14array[folderMaxSize];
-  const word PROGMEM folder15array[folderMaxSize];
-  const word PROGMEM folder16array[folderMaxSize];
-  const word PROGMEM folder17array[folderMaxSize];
-  const word PROGMEM folder18array[folderMaxSize];
-  const word PROGMEM folder19array[folderMaxSize];
-  const word PROGMEM folder20array[folderMaxSize];
-*/
+const word PROGMEM folder11array[folderMaxSize];
+const word PROGMEM folder12array[folderMaxSize];
+const word PROGMEM folder13array[folderMaxSize];
+const word PROGMEM folder14array[folderMaxSize];
+const word PROGMEM folder15array[folderMaxSize];
+const word PROGMEM folder16array[folderMaxSize];
+const word PROGMEM folder17array[folderMaxSize];
+const word PROGMEM folder18array[folderMaxSize];
+const word PROGMEM folder19array[folderMaxSize];
+const word PROGMEM folder20array[folderMaxSize];
+const word PROGMEM folder21array[folderMaxSize];
+const word PROGMEM folder22array[folderMaxSize];
+const word PROGMEM folder23array[folderMaxSize];
+const word PROGMEM folder24array[folderMaxSize];
+const word PROGMEM folder25array[folderMaxSize];
 
 

@@ -10,18 +10,21 @@ Folder folder7(folder7array, folder7num);
 Folder folder8(folder8array, folder8num);
 Folder folder9(folder9array, folder9num);
 Folder folder10(folder10array, folder10num);
-/*  Folder folder11(folder11array, folder11num);
-  Folder folder12(folder12array, folder12num);
-  Folder folder13(folder13array, folder13num);
-  Folder folder14(folder14array, folder14num);
-  Folder folder15(folder15array, folder15num);
-  Folder folder16(folder16array, folder16num);
-  Folder folder17(folder17array, folder17num);
-  //Folder folder18(folder18array, folder18num);
-  //Folder folder19(folder19array, folder19num);
-  //Folder folder20(folder20array, folder20num);
-*/
-
+Folder folder11(folder11array, folder11num);
+Folder folder12(folder12array, folder12num);
+Folder folder13(folder13array, folder13num);
+Folder folder14(folder14array, folder14num);
+Folder folder15(folder15array, folder15num);
+Folder folder16(folder16array, folder16num);
+Folder folder17(folder17array, folder17num);
+Folder folder18(folder18array, folder18num);
+Folder folder19(folder19array, folder19num);
+Folder folder20(folder20array, folder20num);
+Folder folder21(folder21array, folder21num);
+Folder folder22(folder22array, folder22num);
+Folder folder23(folder23array, folder23num);
+Folder folder24(folder24array, folder24num);
+Folder folder25(folder25array, folder25num);
 
 
 
@@ -71,7 +74,7 @@ void setup()
   folder9size = fileNumArray[8];
   folder10size = fileNumArray[9];
   folder11size = fileNumArray[10];
-  /* folder12size = fileNumArray[11];
+  folder12size = fileNumArray[11];
     folder13size = fileNumArray[12];
     folder14size = fileNumArray[13];
     folder15size = fileNumArray[14];
@@ -81,7 +84,12 @@ void setup()
     folder18size = fileNumArray[18];
     folder19size = fileNumArray[19];
     folder20size = fileNumArray[20];
-  */
+    folder21size = fileNumArray[21];
+    folder22size = fileNumArray[22];
+    folder23size = fileNumArray[23];
+    folder24size = fileNumArray[24];
+    folder25size = fileNumArray[25];
+ 
 
   //  Serial.println();
   folder1.shuffle(folder1size);
@@ -94,7 +102,7 @@ void setup()
   folder8.shuffle(folder8size);
   folder9.shuffle(folder9size);
   folder10.shuffle(folder10size);
-  /*  folder11.shuffle(folder11size);
+  folder11.shuffle(folder11size);
     folder12.shuffle(folder12size);
     folder13.shuffle(folder13size);
     folder14.shuffle(folder14size);
@@ -104,10 +112,15 @@ void setup()
     folder18.shuffle(folder18size);
     folder19.shuffle(folder19size);
     folder20.shuffle(folder20size);
-  */
+    folder21.shuffle(folder21size);
+    folder22.shuffle(folder22size);
+    folder23.shuffle(folder23size);
+    folder24.shuffle(folder24size);
+    folder25.shuffle(folder25size);
+  
 
   Serial.println();
-  Serial.println("***** READY! *****");
+  Serial.println(F("***** READY! *****"));
   //  Serial.println();
 
 
@@ -151,13 +164,40 @@ void checkNumFilesInfolders() {  // reads SD card, returns number of files in ea
   }
 }
 
-void setRandomDelayTime (){
-        int randomDelayNum = random(ringerMinDelay, ringerMaxDelay);
-        ringerDelay = (randomDelayNum * 1000);
-              Serial.println(ringerDelay);
+void setRandomDelayTime () {
+  int randomDelayNum = random(ringerMinDelay, ringerMaxDelay);
+  ringerDelay = (randomDelayNum * 1000);
+  Serial.println(ringerDelay);
+}
 
-      }
+void playDialTone() {
+  currentPhoneState = DIAL_TONE;   // set FX variable to "dial tone" status (1)
+  sendCommand(CMD_PLAY_W_INDEX, 0, 1);    // play dial tone...
+  Serial.println();
+  Serial.println(F("dial tone"));
+  Serial.println();
+}
 
+void playOperatorErrorMessage() {
+  Serial.println();
+  Serial.println(F("wrong number"));
+  Serial.println();
+  sendCommand(CMD_PLAY_W_INDEX, 0, 3);   // play operator error message
+}
+
+void playRinging() {
+  Serial.println();
+  Serial.println(F("ringing"));
+  Serial.println();
+  sendCommand(CMD_PLAY_W_INDEX, 0, 2);    // play ringing tone...
+}
+
+void dialRandomNumber() {
+  int randomPhoneNum = random(0, (totalNumFolders - 1));
+  fullNumberSendBuffer = phoneNumbers[randomPhoneNum];
+  Serial.println(randomPhoneNum);
+  Serial.println(fullNumberSendBuffer);
+}
 void loop() {
 
 
@@ -172,11 +212,7 @@ void loop() {
   if (hookIsUp) { // if the hook is up...
     if (currentPhoneState == HUNG_UP && !playingAudio) // if audio isn't playing,
     {
-      currentPhoneState = DIAL_TONE;   // set FX variable to "dial tone" status (1)
-      sendCommand(CMD_PLAY_W_INDEX, 0, 1);    // play dial tone...
-      Serial.println();
-      Serial.println("dial tone");
-      Serial.println();
+      playDialTone();
       folderOpen = true;    // tell system there is in fact a folder open...
       playingAudio = true;  // and tell the system that there's audio playing...
     }
@@ -188,38 +224,28 @@ void loop() {
       currentPhoneState = RINGING;
 
       if (currentPhoneState == RINGING && wrongNumber) {
-        Serial.println();
-        Serial.println("wrong number");
-        Serial.println();
-        sendCommand(CMD_PLAY_W_INDEX, 0, 3);   // play operator error message
+        playOperatorErrorMessage();
         folderOpen = true;
         playingAudio = true;
 
       }
       else if (currentPhoneState == RINGING && !wrongNumber) // if the phone is ringing... AND the number dialed is correct...
       {
-        Serial.println();
-        Serial.println("ringing");
-        Serial.println();
+        playRinging();
         setRandomDelayTime();
-        sendCommand(CMD_PLAY_W_INDEX, 0, 2);    // play ringing tone...
         folderOpen = true;
         playingAudio = true;
-        //delay(delayTime); // give ringing a chance to happen
         previousMillis = currentMillis;
       }
     }
-  
- 
+
+
     if (currentPhoneState == RINGING && (currentMillis - previousMillis > ringerDelay)) { // randomize this value for varied ringing
 
       currentPhoneState = READY_TO_PLAY_FOLDER;
 
       if (fullNumberSendBuffer == DIALNUM_RANDOM) {
-        int randomPhoneNum = random(0, (totalNumFolders - 1));
-        fullNumberSendBuffer = phoneNumbers[randomPhoneNum];
-        Serial.println(randomPhoneNum);
-        Serial.println(fullNumberSendBuffer);
+        dialRandomNumber();
       }
 
       if (fullNumberSendBuffer == DIALNUM_FOLDER_1) { // if FX var is in "play folder mode" AND dialed phone num is legit AND that number is for folder 1...
@@ -256,6 +282,11 @@ void loop() {
         folder4.play();
         playingAudio = true;
         folder4.allPlayedChecker(folder4size);
+
+
+
+
+        
       }
     }
   }
