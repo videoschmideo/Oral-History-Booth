@@ -16,7 +16,7 @@
 #define ARDUINO_TX 6  //connect to RX of the module
 
 /**********Dialer Constants******/
-#define numLength 7
+#define numLength 4
 #define hookPin 4
 #define pulsePin 3
 
@@ -144,23 +144,24 @@ const byte PROGMEM folder1num = 1;
 const byte PROGMEM folder2num = 2;
 const byte PROGMEM folder3num = 3;
 const byte PROGMEM folder4num = 4;
-const byte PROGMEM folder5num = 5;
-const byte PROGMEM folder6num = 6;
-const byte PROGMEM folder7num = 7;
-const byte PROGMEM folder8num = 8;
-const byte PROGMEM folder9num = 9;
-const byte PROGMEM folder10num = 10;
-const byte PROGMEM folder11num = 11;
-const byte PROGMEM folder12num = 12;
-const byte PROGMEM folder13num = 13;
-const byte PROGMEM folder14num = 14;
-const byte PROGMEM folder15num = 15;
-const byte PROGMEM folder16num = 16;
-const byte PROGMEM folder17num = 17;
-const byte PROGMEM folder18num = 18;
-const byte PROGMEM folder19num = 19;
-const byte PROGMEM folder20num = 20;
-
+/*
+  const byte PROGMEM folder5num = 5;
+  const byte PROGMEM folder6num = 6;
+  const byte PROGMEM folder7num = 7;
+  const byte PROGMEM folder8num = 8;
+  const byte PROGMEM folder9num = 9;
+  const byte PROGMEM folder10num = 10;
+  const byte PROGMEM folder11num = 11;
+  const byte PROGMEM folder12num = 12;
+  const byte PROGMEM folder13num = 13;
+  const byte PROGMEM folder14num = 14;
+  const byte PROGMEM folder15num = 15;
+  const byte PROGMEM folder16num = 16;
+  const byte PROGMEM folder17num = 17;
+  const byte PROGMEM folder18num = 18;
+  const byte PROGMEM folder19num = 19;
+  const byte PROGMEM folder20num = 20;
+*/
 
 //define number of files in each folder here
 // sets # of files in each folder (up to existing max limit), sends value to instances of "folder" class objects
@@ -168,36 +169,38 @@ byte folder1size;
 byte folder2size;
 byte folder3size;
 byte folder4size;
-byte folder5size;
-byte folder6size;
-byte folder7size;
-byte folder8size;
-byte folder9size;
-byte folder10size;
-byte folder11size;
-byte folder12size;
-byte folder13size;
-byte folder14size;
-byte folder15size;
-byte folder16size;
-byte folder17size;
-byte folder18size;
-byte folder19size;
-byte folder20size;
-
+/*
+  byte folder5size;
+  byte folder6size;
+  byte folder7size;
+  byte folder8size;
+  byte folder9size;
+  byte folder10size;
+  byte folder11size;
+  byte folder12size;
+  byte folder13size;
+  byte folder14size;
+  byte folder15size;
+  byte folder16size;
+  byte folder17size;
+  byte folder18size;
+  byte folder19size;
+  byte folder20size;
+*/
 
 // create variables for array, size, folder state here. Need one for each folder.
 const word PROGMEM folder1array[folderMaxSize];
 const word PROGMEM folder2array[folderMaxSize];
 const word PROGMEM folder3array[folderMaxSize];
 const word PROGMEM folder4array[folderMaxSize];
-const word PROGMEM folder5array[folderMaxSize];
-const word PROGMEM folder6array[folderMaxSize];
-const word PROGMEM folder7array[folderMaxSize];
-const word PROGMEM folder8array[folderMaxSize];
-const word PROGMEM folder9array[folderMaxSize];
-const word PROGMEM folder10array[folderMaxSize];
-/* const word PROGMEM folder11array[folderMaxSize];
+/*
+  const word PROGMEM folder5array[folderMaxSize];
+  const word PROGMEM folder6array[folderMaxSize];
+  const word PROGMEM folder7array[folderMaxSize];
+  const word PROGMEM folder8array[folderMaxSize];
+  const word PROGMEM folder9array[folderMaxSize];
+  const word PROGMEM folder10array[folderMaxSize];
+  const word PROGMEM folder11array[folderMaxSize];
   const word PROGMEM folder12array[folderMaxSize];
   const word PROGMEM folder13array[folderMaxSize];
   const word PROGMEM folder14array[folderMaxSize];

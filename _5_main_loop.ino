@@ -1,28 +1,24 @@
 //create instances of folder object here using info above
 
-Folder folder1(folder1array, folder1num);
-Folder folder2(folder2array, folder2num);
-Folder folder3(folder3array, folder3num);
-Folder folder4(folder4array, folder4num);
-Folder folder5(folder5array, folder5num);
-Folder folder6(folder6array, folder6num);
-Folder folder7(folder7array, folder7num);
-Folder folder8(folder8array, folder8num);
-Folder folder9(folder9array, folder9num);
-Folder folder10(folder10array, folder10num);
-/*  Folder folder11(folder11array, folder11num);
-  Folder folder12(folder12array, folder12num);
-  Folder folder13(folder13array, folder13num);
-  Folder folder14(folder14array, folder14num);
-  Folder folder15(folder15array, folder15num);
-  Folder folder16(folder16array, folder16num);
-  Folder folder17(folder17array, folder17num);
-  //Folder folder18(folder18array, folder18num);
-  //Folder folder19(folder19array, folder19num);
-  //Folder folder20(folder20array, folder20num);
+Folder folder1(folder1array, folder1num, folder1size);
+Folder folder2(folder2array, folder2num, folder2size);
+Folder folder3(folder3array, folder3num, folder3size);
+Folder folder4(folder4array, folder4num, folder4size);
+/*
+  Folder folder5(folder5array, folder5num, folder5size);
+  Folder folder6(folder6array, folder6num, folder6size);
+  Folder folder7(folder7array, folder7num, folder7size);
+  Folder folder8(folder8array, folder8num, folder8size);
+  Folder folder9(folder9array, folder9num, folder9size);
+  Folder folder10(folder10array, folder10num, folder10size);
 */
 
-
+const long folders[totalNumFolders] = {
+  (folder1array, folder1num, folder1size),
+  (folder2array, folder2num, folder2size),
+  (folder3array, folder3num, folder3size),
+  (folder4array, folder4num, folder4size),
+};
 
 
 void setup()
@@ -64,14 +60,15 @@ void setup()
   folder2size = fileNumArray[1];
   folder3size = fileNumArray[2];
   folder4size = fileNumArray[3];
-  folder5size = fileNumArray[4];
-  folder6size = fileNumArray[5];
-  folder7size = fileNumArray[6];
-  folder8size = fileNumArray[7];
-  folder9size = fileNumArray[8];
-  folder10size = fileNumArray[9];
-  folder11size = fileNumArray[10];
-  /* folder12size = fileNumArray[11];
+  /*
+    folder5size = fileNumArray[4];
+    folder6size = fileNumArray[5];
+    folder7size = fileNumArray[6];
+    folder8size = fileNumArray[7];
+    folder9size = fileNumArray[8];
+    folder10size = fileNumArray[9];
+    folder11size = fileNumArray[10];
+    folder12size = fileNumArray[11];
     folder13size = fileNumArray[12];
     folder14size = fileNumArray[13];
     folder15size = fileNumArray[14];
@@ -88,13 +85,14 @@ void setup()
   folder2.shuffle(folder2size);
   folder3.shuffle(folder3size);
   folder4.shuffle(folder4size);
-  folder5.shuffle(folder5size);
-  folder6.shuffle(folder6size);
-  folder7.shuffle(folder7size);
-  folder8.shuffle(folder8size);
-  folder9.shuffle(folder9size);
-  folder10.shuffle(folder10size);
-  /*  folder11.shuffle(folder11size);
+  /*
+     folder5.shuffle(folder5size);
+    folder6.shuffle(folder6size);
+    folder7.shuffle(folder7size);
+    folder8.shuffle(folder8size);
+    folder9.shuffle(folder9size);
+    folder10.shuffle(folder10size);
+    folder11.shuffle(folder11size);
     folder12.shuffle(folder12size);
     folder13.shuffle(folder13size);
     folder14.shuffle(folder14size);
@@ -151,12 +149,12 @@ void checkNumFilesInfolders() {  // reads SD card, returns number of files in ea
   }
 }
 
-void setRandomDelayTime (){
-        int randomDelayNum = random(ringerMinDelay, ringerMaxDelay);
-        ringerDelay = (randomDelayNum * 1000);
-              Serial.println(ringerDelay);
+void setRandomDelayTime () {
+  int randomDelayNum = random(ringerMinDelay, ringerMaxDelay);
+  ringerDelay = (randomDelayNum * 1000);
+  Serial.println(ringerDelay);
 
-      }
+}
 
 void loop() {
 
@@ -209,8 +207,8 @@ void loop() {
         previousMillis = currentMillis;
       }
     }
-  
- 
+
+
     if (currentPhoneState == RINGING && (currentMillis - previousMillis > ringerDelay)) { // randomize this value for varied ringing
 
       currentPhoneState = READY_TO_PLAY_FOLDER;
@@ -227,7 +225,7 @@ void loop() {
         folderOpen = true;    // tell system there is in fact a folder open...
         folder1.play();       // and then play the first file.
         playingAudio = true;  // Now tell the system that there's audio playing...
-        folder1.allPlayedChecker(folder1size); // and check to see if all the files have been played before reshuffling.
+     //   folder1.allPlayedChecker(folder1size); // and check to see if all the files have been played before reshuffling.
       }
 
       if (fullNumberSendBuffer == DIALNUM_FOLDER_2)
@@ -236,7 +234,7 @@ void loop() {
         folderOpen = true;
         folder2.play();
         playingAudio = true;
-        folder2.allPlayedChecker(folder2size);
+      //  folder2.allPlayedChecker(folder2size);
       }
 
       if (fullNumberSendBuffer == DIALNUM_FOLDER_3)
@@ -245,7 +243,7 @@ void loop() {
         folderOpen = true;
         folder3.play();
         playingAudio = true;
-        folder3.allPlayedChecker(folder3size);
+       // folder3.allPlayedChecker(folder3size);
 
       }
 
@@ -255,7 +253,7 @@ void loop() {
         folderOpen = true;
         folder4.play();
         playingAudio = true;
-        folder4.allPlayedChecker(folder4size);
+       // folder4.allPlayedChecker(folder4size);
       }
     }
   }
