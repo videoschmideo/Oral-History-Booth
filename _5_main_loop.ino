@@ -203,9 +203,11 @@ void loop() {
         Serial.println(fullNumberSendBuffer);
       }
 
-      for (int i = 0; i < totalNumFiles + 1 ; i++) // scan through existing numners
-        if (fullNumberSendBuffer == i) { // if dialed number is legit...
-          sendCommand(CMD_PLAY_W_INDEX, 1, i);    // play file associated with it.
+        if (fullNumberSendBuffer == CHARLES_COE_1) { // if dialed number is legit...
+          sendCommand(CMD_PLAY_W_INDEX, 1, 1);    // play file associated with it.
+          playingAudio = true;
+          folderOpen = true;
+
         }
 
 
@@ -241,7 +243,7 @@ void loop() {
         }
 
       */
-
+    }
       if (mp3.available()) // Checks for reply from mp3 player when player is queried
       {
         decodeMP3Answer(); // decode binary and turn bytes into HEX
@@ -278,7 +280,7 @@ void loop() {
       delay(10);
     }
   }
-}
+
 
 
 

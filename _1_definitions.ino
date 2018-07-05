@@ -16,7 +16,7 @@
 #define ARDUINO_TX 6  //connect to RX of the module
 
 /**********Dialer Constants******/
-#define numLength 4
+#define numLength 7
 #define hookPin 4
 #define pulsePin 3
 
