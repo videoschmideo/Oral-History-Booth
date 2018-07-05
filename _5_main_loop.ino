@@ -4,26 +4,16 @@ Folder folder1(folder1array, folder1num, folder1size);
 Folder folder2(folder2array, folder2num, folder2size);
 Folder folder3(folder3array, folder3num, folder3size);
 Folder folder4(folder4array, folder4num, folder4size);
-/*
-  Folder folder5(folder5array, folder5num, folder5size);
-  Folder folder6(folder6array, folder6num, folder6size);
-  Folder folder7(folder7array, folder7num, folder7size);
-  Folder folder8(folder8array, folder8num, folder8size);
-  Folder folder9(folder9array, folder9num, folder9size);
-  Folder folder10(folder10array, folder10num, folder10size);
-*/
-
-const long playFolder[totalNumFolders] = {
-  folder1.play(),
-  folder2play(), 
-  folder3play(),
-  folder4play(),
-};
+Folder folder5(folder5array, folder5num, folder5size);
+Folder folder6(folder6array, folder6num, folder6size);
+Folder folder7(folder7array, folder7num, folder7size);
+Folder folder8(folder8array, folder8num, folder8size);
+Folder folder9(folder9array, folder9num, folder9size);
+// Folder folder10(folder10array, folder10num, folder10size);
 
 
 void setup()
 {
-
 
 
   Serial.begin(9600);
@@ -34,7 +24,6 @@ void setup()
   sendCommand(CMD_SET_VOLUME, 0, 16);
 
   delay(200);
-  //  mcp.begin();  // initializes MPC port expansion chip. Uncomment to enable.
 
   delay (10);
   for (byte x = 2; x < 4; x++)
@@ -42,30 +31,23 @@ void setup()
     pinMode(x, INPUT); // set pins on mcp chip as inputs. Uncomment to enable.
     pinMode(x, INPUT_PULLUP); // set input pin to normally low
   }
-
-
   Serial.begin(9600);
   pinMode(13, OUTPUT);  // use an LED on Pin 13 for debugging
 
   delay(100);
 
-  /* for (byte y = 0; y < totalNumFolders; y++)
-    {
-     Serial.println(phoneNumbers[y]);
-    }
-  */
   checkNumFilesInfolders();
 
   folder1size = fileNumArray[0];
   folder2size = fileNumArray[1];
   folder3size = fileNumArray[2];
   folder4size = fileNumArray[3];
+  folder5size = fileNumArray[4];
+  folder6size = fileNumArray[5];
+  folder7size = fileNumArray[6];
+  folder8size = fileNumArray[7];
+  folder9size = fileNumArray[8];
   /*
-    folder5size = fileNumArray[4];
-    folder6size = fileNumArray[5];
-    folder7size = fileNumArray[6];
-    folder8size = fileNumArray[7];
-    folder9size = fileNumArray[8];
     folder10size = fileNumArray[9];
     folder11size = fileNumArray[10];
     folder12size = fileNumArray[11];
@@ -80,28 +62,29 @@ void setup()
     folder20size = fileNumArray[20];
   */
 
+
   //  Serial.println();
   folder1.shuffle(folder1size);
   folder2.shuffle(folder2size);
   folder3.shuffle(folder3size);
   folder4.shuffle(folder4size);
+  folder5.shuffle(folder5size);
+  folder6.shuffle(folder6size);
+  folder7.shuffle(folder7size);
+  folder8.shuffle(folder8size);
+  folder9.shuffle(folder9size);
   /*
-     folder5.shuffle(folder5size);
-    folder6.shuffle(folder6size);
-    folder7.shuffle(folder7size);
-    folder8.shuffle(folder8size);
-    folder9.shuffle(folder9size);
-    folder10.shuffle(folder10size);
-    folder11.shuffle(folder11size);
-    folder12.shuffle(folder12size);
-    folder13.shuffle(folder13size);
-    folder14.shuffle(folder14size);
-    folder15.shuffle(folder15size);
-    folder16.shuffle(folder16size);
-    folder17.shuffle(folder17size);
-    folder18.shuffle(folder18size);
-    folder19.shuffle(folder19size);
-    folder20.shuffle(folder20size);
+     folder10.shuffle(folder10size);
+      folder11.shuffle(folder11size);
+     folder12.shuffle(folder12size);
+     folder13.shuffle(folder13size);
+     folder14.shuffle(folder14size);
+     folder15.shuffle(folder15size);
+     folder16.shuffle(folder16size);
+     folder17.shuffle(folder17size);
+     folder18.shuffle(folder18size);
+     folder19.shuffle(folder19size);
+     folder20.shuffle(folder20size);
   */
 
   Serial.println();
@@ -220,80 +203,81 @@ void loop() {
         Serial.println(fullNumberSendBuffer);
       }
 
-      if (fullNumberSendBuffer == DIALNUM_FOLDER_1) { // if FX var is in "play folder mode" AND dialed phone num is legit AND that number is for folder 1...
-        folderNumber = 1;     // set folderNumber to this folder (only used when calling "folder" class - sends folder # info to class)
-        folderOpen = true;    // tell system there is in fact a folder open...
-        folder1.play();       // and then play the first file.
-        playingAudio = true;  // Now tell the system that there's audio playing...
-     //   folder1.allPlayedChecker(folder1size); // and check to see if all the files have been played before reshuffling.
-      }
+      for (int i = 0; i < totalNumFiles + 1 ; i++) // scan through existing numners
+        if (fullNumberSendBuffer == i) { // if dialed number is legit...
+          sendCommand(CMD_PLAY_W_INDEX, 1, i);    // play file associated with it.
+        }
 
-      if (fullNumberSendBuffer == DIALNUM_FOLDER_2)
+
+      /*
+            if (fullNumberSendBuffer == DIALNUM_FOLDER_2)
+            {
+              folderNumber = 2;
+              folderOpen = true;
+              folder2.play();
+              playingAudio = true;
+              //  folder2.allPlayedChecker(folder2size);
+            }
+
+            if (fullNumberSendBuffer == DIALNUM_FOLDER_3)
+            {
+              folderNumber = 3;
+              folderOpen = true;
+              folder3.play();
+              playingAudio = true;
+              // folder3.allPlayedChecker(folder3size);
+
+            }
+
+            if (fullNumberSendBuffer == DIALNUM_FOLDER_4)
+            {
+              folderNumber = 4;
+              folderOpen = true;
+              folder4.play();
+              playingAudio = true;
+              // folder4.allPlayedChecker(folder4size);
+            }
+          }
+        }
+
+      */
+
+      if (mp3.available()) // Checks for reply from mp3 player when player is queried
       {
-        folderNumber = 2;
-        folderOpen = true;
-        folder2.play();
-        playingAudio = true;
-      //  folder2.allPlayedChecker(folder2size);
+        decodeMP3Answer(); // decode binary and turn bytes into HEX
+        if (ansbuf[3] == 0x3d) // if the HEX code for "file is done" comes in,
+        {
+          //   doOnlyOnce = !doOnlyOnce; // ... only pay attention to that first reply,
+          //   if (doOnlyOnce)
+          //   {
+          Serial.println();
+          Serial.println(F("finished playing audio file"));
+          Serial.println();
+          playingAudio = false; //...and tell the system there's NO AUDIO playing.
+          //   }
+        }
       }
 
-      if (fullNumberSendBuffer == DIALNUM_FOLDER_3)
+
+
+      if (folderOpen && !hookIsUp) // if a folder is active and hook is closed,
       {
-        folderNumber = 3;
-        folderOpen = true;
-        folder3.play();
-        playingAudio = true;
-       // folder3.allPlayedChecker(folder3size);
+        sendCommand(CMD_STOP_PLAY, 0, 0); // tell mp3 player to stsop what it's doing...
+        fullNumberSendBuffer = 0;
+        fullNumber = "";
+        playingAudio = 0;                 // tell the rest of the system there's no audio playing...
+        folderNumber = 0;
+        folderOpen = false;               // ...and that there are no folders are active.
+        currentPhoneState = 0;
+        Serial.println();
+        Serial.println(F("all folders CLOSED!"));
+        Serial.println();
 
       }
 
-      if (fullNumberSendBuffer == DIALNUM_FOLDER_4)
-      {
-        folderNumber = 4;
-        folderOpen = true;
-        folder4.play();
-        playingAudio = true;
-       // folder4.allPlayedChecker(folder4size);
-      }
+      delay(10);
     }
   }
-
-
-
-  if (mp3.available()) // Checks for reply from mp3 player when player is queried
-  {
-    decodeMP3Answer(); // decode binary and turn bytes into HEX
-    if (ansbuf[3] == 0x3d) // if the HEX code for "file is done" comes in,
-    {
-      //   doOnlyOnce = !doOnlyOnce; // ... only pay attention to that first reply,
-      //   if (doOnlyOnce)
-      //   {
-      Serial.println();
-      Serial.println(F("finished playing audio file"));
-      Serial.println();
-      playingAudio = false; //...and tell the system there's NO AUDIO playing.
-      //   }
-    }
-  }
-
-
-
-  if (folderOpen && !hookIsUp) // if a folder is active and hook is closed,
-  {
-    sendCommand(CMD_STOP_PLAY, 0, 0); // tell mp3 player to stsop what it's doing...
-    fullNumberSendBuffer = 0;
-    fullNumber = "";
-    playingAudio = 0;                 // tell the rest of the system there's no audio playing...
-    folderNumber = 0;
-    folderOpen = false;               // ...and that there are no folders are active.
-    currentPhoneState = 0;
-    Serial.println();
-    Serial.println(F("all folders CLOSED!"));
-    Serial.println();
-
-  }
-
-  delay(10);
 }
 
 

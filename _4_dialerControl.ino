@@ -117,16 +117,14 @@ void wrongNumberChecker() {
   }
  for (byte x = 0; x < (totalNumFolders + 1); x++) {
     if (fullNumberSendBuffer = phoneNumbers[x]) {
-      tempNumBuffer = fullNunberSendBuffer;
+      tempNumBuffer = fullNumberSendBuffer;
       
     }
   }
  }
 
 
-void numberChecker(){
-  for byte x = 0
-}
+
 
 bool fileDone() {  // checks if file is done playing
   if (ansbuf[3] == 0x3d) {
