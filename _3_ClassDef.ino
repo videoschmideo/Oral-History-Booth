@@ -2,7 +2,7 @@
  *  May 2018
  *  Used to control multiple folders of audio independently
  *  www.videoschmideo.com
- */
+ *
 
 class Folder
 {
@@ -82,9 +82,9 @@ class Folder
         allPlayedChecker(folderSize);
     }
 
- 
+
 
 }; // end of class
 
-
+ */
 

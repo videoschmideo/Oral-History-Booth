@@ -177,7 +177,7 @@ const long phoneNumbers[(totalNumFiles + 1)] = {
 
 
 
-
+/*
 //Variables for folder number, file count per folder
 const byte PROGMEM folder1num = 1;
 const byte PROGMEM folder2num = 2;
@@ -200,7 +200,7 @@ const byte PROGMEM folder9num = 9;
   const byte PROGMEM folder18num = 18;
   const byte PROGMEM folder19num = 19;
   const byte PROGMEM folder20num = 20;
-*/
+
 
 //define number of files in each folder here
 // sets # of files in each folder (up to existing max limit), sends value to instances of "folder" class objects
@@ -225,7 +225,7 @@ byte folder9size;
   byte folder18size;
   byte folder19size;
   byte folder20size;
-*/
+
 
 // create variables for array, size, folder state here. Need one for each folder.
 const word PROGMEM folder1array[folderMaxSize];

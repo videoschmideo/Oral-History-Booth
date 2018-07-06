@@ -1,17 +1,16 @@
 //create instances of folder object here using info above
-
-Folder folder1(folder1array, folder1num, folder1size);
-Folder folder2(folder2array, folder2num, folder2size);
-Folder folder3(folder3array, folder3num, folder3size);
-Folder folder4(folder4array, folder4num, folder4size);
-Folder folder5(folder5array, folder5num, folder5size);
-Folder folder6(folder6array, folder6num, folder6size);
-Folder folder7(folder7array, folder7num, folder7size);
-Folder folder8(folder8array, folder8num, folder8size);
-Folder folder9(folder9array, folder9num, folder9size);
-// Folder folder10(folder10array, folder10num, folder10size);
-
-
+/*
+  Folder folder1(folder1array, folder1num, folder1size);
+  Folder folder2(folder2array, folder2num, folder2size);
+  Folder folder3(folder3array, folder3num, folder3size);
+  Folder folder4(folder4array, folder4num, folder4size);
+  Folder folder5(folder5array, folder5num, folder5size);
+  Folder folder6(folder6array, folder6num, folder6size);
+  Folder folder7(folder7array, folder7num, folder7size);
+  Folder folder8(folder8array, folder8num, folder8size);
+  Folder folder9(folder9array, folder9num, folder9size);
+  // Folder folder10(folder10array, folder10num, folder10size);
+*/
 void setup()
 {
 
@@ -36,55 +35,55 @@ void setup()
 
   delay(100);
 
-  checkNumFilesInfolders();
+  /*  checkNumFilesInfolders();
 
-  folder1size = fileNumArray[0];
-  folder2size = fileNumArray[1];
-  folder3size = fileNumArray[2];
-  folder4size = fileNumArray[3];
-  folder5size = fileNumArray[4];
-  folder6size = fileNumArray[5];
-  folder7size = fileNumArray[6];
-  folder8size = fileNumArray[7];
-  folder9size = fileNumArray[8];
-  /*
-    folder10size = fileNumArray[9];
-    folder11size = fileNumArray[10];
-    folder12size = fileNumArray[11];
-    folder13size = fileNumArray[12];
-    folder14size = fileNumArray[13];
-    folder15size = fileNumArray[14];
-    folder15size = fileNumArray[15];
-    folder16size = fileNumArray[16];
-    folder17size = fileNumArray[17];
-    folder18size = fileNumArray[18];
-    folder19size = fileNumArray[19];
-    folder20size = fileNumArray[20];
-  */
+    folder1size = fileNumArray[0];
+    folder2size = fileNumArray[1];
+    folder3size = fileNumArray[2];
+    folder4size = fileNumArray[3];
+    folder5size = fileNumArray[4];
+    folder6size = fileNumArray[5];
+    folder7size = fileNumArray[6];
+    folder8size = fileNumArray[7];
+    folder9size = fileNumArray[8];
+
+      folder10size = fileNumArray[9];
+      folder11size = fileNumArray[10];
+      folder12size = fileNumArray[11];
+      folder13size = fileNumArray[12];
+      folder14size = fileNumArray[13];
+      folder15size = fileNumArray[14];
+      folder15size = fileNumArray[15];
+      folder16size = fileNumArray[16];
+      folder17size = fileNumArray[17];
+      folder18size = fileNumArray[18];
+      folder19size = fileNumArray[19];
+      folder20size = fileNumArray[20];
 
 
-  //  Serial.println();
-  folder1.shuffle(folder1size);
-  folder2.shuffle(folder2size);
-  folder3.shuffle(folder3size);
-  folder4.shuffle(folder4size);
-  folder5.shuffle(folder5size);
-  folder6.shuffle(folder6size);
-  folder7.shuffle(folder7size);
-  folder8.shuffle(folder8size);
-  folder9.shuffle(folder9size);
-  /*
-     folder10.shuffle(folder10size);
-      folder11.shuffle(folder11size);
-     folder12.shuffle(folder12size);
-     folder13.shuffle(folder13size);
-     folder14.shuffle(folder14size);
-     folder15.shuffle(folder15size);
-     folder16.shuffle(folder16size);
-     folder17.shuffle(folder17size);
-     folder18.shuffle(folder18size);
-     folder19.shuffle(folder19size);
-     folder20.shuffle(folder20size);
+
+    //  Serial.println();
+    folder1.shuffle(folder1size);
+    folder2.shuffle(folder2size);
+    folder3.shuffle(folder3size);
+    folder4.shuffle(folder4size);
+    folder5.shuffle(folder5size);
+    folder6.shuffle(folder6size);
+    folder7.shuffle(folder7size);
+    folder8.shuffle(folder8size);
+    folder9.shuffle(folder9size);
+    /*
+       folder10.shuffle(folder10size);
+        folder11.shuffle(folder11size);
+       folder12.shuffle(folder12size);
+       folder13.shuffle(folder13size);
+       folder14.shuffle(folder14size);
+       folder15.shuffle(folder15size);
+       folder16.shuffle(folder16size);
+       folder17.shuffle(folder17size);
+       folder18.shuffle(folder18size);
+       folder19.shuffle(folder19size);
+       folder20.shuffle(folder20size);
   */
 
   Serial.println();
@@ -93,8 +92,8 @@ void setup()
 
 
 }
-
-void checkNumFilesInfolders() {  // reads SD card, returns number of files in each folder
+/*
+  void checkNumFilesInfolders() {  // reads SD card, returns number of files in each folder
 
   if (initSent == false)  // if memory chest hasn't initialized (sensed # files in each folder)...
   {
@@ -130,8 +129,8 @@ void checkNumFilesInfolders() {  // reads SD card, returns number of files in ea
       initSent = true; // all done with initializing. Only need to do it once.
     }
   }
-}
-
+  }
+*/
 void setRandomDelayTime () {
   int randomDelayNum = random(ringerMinDelay, ringerMaxDelay);
   ringerDelay = (randomDelayNum * 1000);
@@ -140,7 +139,6 @@ void setRandomDelayTime () {
 }
 
 void loop() {
-
 
   unsigned long currentMillis = millis(); // sets up timer for ringer
 
@@ -191,7 +189,6 @@ void loop() {
       }
     }
 
-
     if (currentPhoneState == RINGING && (currentMillis - previousMillis > ringerDelay)) { // randomize this value for varied ringing
 
       currentPhoneState = READY_TO_PLAY_FOLDER;
@@ -203,83 +200,54 @@ void loop() {
         Serial.println(fullNumberSendBuffer);
       }
 
-        if (fullNumberSendBuffer == CHARLES_COE_1) { // if dialed number is legit...
-          sendCommand(CMD_PLAY_W_INDEX, 1, 1);    // play file associated with it.
+      for (int i = 0; i < totalNumFiles; i++) {
+        if (fullNumberSendBuffer == i) { // if dialed number is legit...
+          sendCommand(CMD_PLAY_W_INDEX, 1, i);    // play file associated with it.
           playingAudio = true;
           folderOpen = true;
-
         }
-
-
-      /*
-            if (fullNumberSendBuffer == DIALNUM_FOLDER_2)
-            {
-              folderNumber = 2;
-              folderOpen = true;
-              folder2.play();
-              playingAudio = true;
-              //  folder2.allPlayedChecker(folder2size);
-            }
-
-            if (fullNumberSendBuffer == DIALNUM_FOLDER_3)
-            {
-              folderNumber = 3;
-              folderOpen = true;
-              folder3.play();
-              playingAudio = true;
-              // folder3.allPlayedChecker(folder3size);
-
-            }
-
-            if (fullNumberSendBuffer == DIALNUM_FOLDER_4)
-            {
-              folderNumber = 4;
-              folderOpen = true;
-              folder4.play();
-              playingAudio = true;
-              // folder4.allPlayedChecker(folder4size);
-            }
-          }
-        }
-
-      */
+      }
     }
-      if (mp3.available()) // Checks for reply from mp3 player when player is queried
-      {
-        decodeMP3Answer(); // decode binary and turn bytes into HEX
-        if (ansbuf[3] == 0x3d) // if the HEX code for "file is done" comes in,
-        {
-          //   doOnlyOnce = !doOnlyOnce; // ... only pay attention to that first reply,
-          //   if (doOnlyOnce)
-          //   {
-          Serial.println();
-          Serial.println(F("finished playing audio file"));
-          Serial.println();
-          playingAudio = false; //...and tell the system there's NO AUDIO playing.
-          //   }
-        }
-      }
 
+  }
 
-
-      if (folderOpen && !hookIsUp) // if a folder is active and hook is closed,
-      {
-        sendCommand(CMD_STOP_PLAY, 0, 0); // tell mp3 player to stsop what it's doing...
-        fullNumberSendBuffer = 0;
-        fullNumber = "";
-        playingAudio = 0;                 // tell the rest of the system there's no audio playing...
-        folderNumber = 0;
-        folderOpen = false;               // ...and that there are no folders are active.
-        currentPhoneState = 0;
-        Serial.println();
-        Serial.println(F("all folders CLOSED!"));
-        Serial.println();
-
-      }
-
-      delay(10);
+  
+  if (mp3.available()) // Checks for reply from mp3 player when player is queried
+  {
+    decodeMP3Answer(); // decode binary and turn bytes into HEX
+    if (ansbuf[3] == 0x3d) // if the HEX code for "file is done" comes in,
+    {
+      //   doOnlyOnce = !doOnlyOnce; // ... only pay attention to that first reply,
+      //   if (doOnlyOnce)
+      //   {
+      Serial.println();
+      Serial.println(F("finished playing audio file"));
+      Serial.println();
+      playingAudio = false; //...and tell the system there's NO AUDIO playing.
+      //   }
     }
   }
+
+
+
+  if (folderOpen && !hookIsUp) // if a folder is active and hook is closed,
+  {
+    sendCommand(CMD_STOP_PLAY, 0, 0); // tell mp3 player to stsop what it's doing...
+    fullNumberSendBuffer = 0;
+    fullNumber = "";
+    playingAudio = 0;                 // tell the rest of the system there's no audio playing...
+    folderNumber = 0;
+    folderOpen = false;               // ...and that there are no folders are active.
+    currentPhoneState = 0;
+    Serial.println();
+    Serial.println(F("all folders CLOSED!"));
+    Serial.println();
+
+  }
+
+  delay(10);
+}
+
 
 
 
