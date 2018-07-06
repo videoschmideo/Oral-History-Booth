@@ -13,11 +13,14 @@
 ///////////////////////////////////////////////////////
 /*****set "phone numbers" for folders here******///////
 ///////////////////////////////////////////////////////
+const byte folderMaxSize  = 8; // max # files allowed in a folder (ie, # of slots in each folder array)
+const int totalNumFolders = 2; // max # of folders
+const int totalNumFiles = 40; // total # files across folders
 
 #define   CHARLES_COE_1            6302000
-#define   CHARLES_COE_2            6322201
-#define   CHARLES_COE_3            6322202
-#define   CHARLES_COE_4            6322203
+#define   CHARLES_COE_2            6302201
+#define   CHARLES_COE_3            6302202
+#define   CHARLES_COE_4            6302203
 
 #define   JAI_UNDERHILL_JOHNSON_1  6322200
 #define   JAI_UNDERHILL_JOHNSON_2  6322201

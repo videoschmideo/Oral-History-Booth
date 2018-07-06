@@ -115,12 +115,12 @@ void wrongNumberChecker() {
       return;
     }
   }
- for (byte x = 0; x < (totalNumFiles + 1); x++) {
-    if (fullNumberSendBuffer = phoneNumbers[x]) {
-      tempNumBuffer = fullNumberSendBuffer;
-      
-    }
-  }
+/// for (byte x = 0; x < (totalNumFiles + 1); x++) {
+//    if (fullNumberSendBuffer = phoneNumbers[x]) {
+//      tempNumBuffer = fullNumberSendBuffer;
+//      
+//    }
+ // }
  }
 
 

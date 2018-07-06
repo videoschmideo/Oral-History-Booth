@@ -35,11 +35,11 @@ void setup()
 
   delay(100);
 
-  /*  checkNumFilesInfolders();
+  checkNumFilesInfolders();
 
-    folder1size = fileNumArray[0];
-    folder2size = fileNumArray[1];
-    folder3size = fileNumArray[2];
+  folder1size = fileNumArray[0];
+  folder2size = fileNumArray[1];
+  /*  folder3size = fileNumArray[2];
     folder4size = fileNumArray[3];
     folder5size = fileNumArray[4];
     folder6size = fileNumArray[5];
@@ -61,7 +61,7 @@ void setup()
       folder20size = fileNumArray[20];
 
 
-
+    /*
     //  Serial.println();
     folder1.shuffle(folder1size);
     folder2.shuffle(folder2size);
@@ -92,8 +92,8 @@ void setup()
 
 
 }
-/*
-  void checkNumFilesInfolders() {  // reads SD card, returns number of files in each folder
+
+void checkNumFilesInfolders() {  // reads SD card, returns number of files in each folder
 
   if (initSent == false)  // if memory chest hasn't initialized (sensed # files in each folder)...
   {
@@ -129,8 +129,22 @@ void setup()
       initSent = true; // all done with initializing. Only need to do it once.
     }
   }
-  }
-*/
+}
+
+void play(int fldrNum, int fileNum) { // plays file based on inputs - folderNumber, FileNumber
+  int fileNumber = fileNum;
+  int folderNumbner = fldrNum;
+  sendCommand(CMD_PLAY_FOLDER_FILE, folderNumber, fileNumber);
+ 
+  //Uncomment for Debugging
+  Serial.println("PLAYING");
+  Serial.print("folder: ");
+  Serial.println(folderNumber);
+  Serial.print(F("file: "));
+  Serial.println(fileNumber);
+  playing = true;
+}
+
 void setRandomDelayTime () {
   int randomDelayNum = random(ringerMinDelay, ringerMaxDelay);
   ringerDelay = (randomDelayNum * 1000);
@@ -162,7 +176,7 @@ void loop() {
 
     unsigned long currentMillis = millis(); // sets up timer for ringer
 
-    if (currentPhoneState == DIAL_TONE && (fullNumber.length() == numLength)) //.. if FX variable is 1 (dial tone) AND a legit phone number length has been dialed AND the hook is up...
+    if (currentPhoneState == DIAL_TONE && (fullNumber.length() == numLength)) //.. if dial tone playing AND a legit phone number length has been dialed AND the hook is up...
     {
       currentPhoneState = RINGING;
 
@@ -173,7 +187,6 @@ void loop() {
         sendCommand(CMD_PLAY_W_INDEX, 0, 3);   // play operator error message
         folderOpen = true;
         playingAudio = true;
-
       }
       else if (currentPhoneState == RINGING && !wrongNumber) // if the phone is ringing... AND the number dialed is correct...
       {
@@ -200,31 +213,37 @@ void loop() {
         Serial.println(fullNumberSendBuffer);
       }
 
-      for (int i = 0; i < totalNumFiles; i++) {
-        if (fullNumberSendBuffer == i) { // if dialed number is legit...
-          sendCommand(CMD_PLAY_W_INDEX, 1, i);    // play file associated with it.
-          playingAudio = true;
-          folderOpen = true;
+      else if (fullNumberSendBuffer != DIALNUM_RANDOM) {
+        for (int i = 0; i < totalNumFiles; i++) {
+          if (fullNumberSendBuffer == phoneNumbers[i]) { // if dialed number is legit...
+            folderNumber = 1;     // set folderNumber to this folder (only used when calling "folder" class - sends folder # info to class)
+            int playFile = i + 1;
+            folderOpen = true;    // tell system there is in fact a folder open...
+            play(folderNumber, playFile);       // and then play the first file.
+            playingAudio = true;  // Now tell the system that there's audio playing..
+
+          }
         }
       }
     }
-
   }
 
-  
+
   if (mp3.available()) // Checks for reply from mp3 player when player is queried
   {
     decodeMP3Answer(); // decode binary and turn bytes into HEX
     if (ansbuf[3] == 0x3d) // if the HEX code for "file is done" comes in,
     {
-      //   doOnlyOnce = !doOnlyOnce; // ... only pay attention to that first reply,
-      //   if (doOnlyOnce)
-      //   {
-      Serial.println();
-      Serial.println(F("finished playing audio file"));
-      Serial.println();
-      playingAudio = false; //...and tell the system there's NO AUDIO playing.
-      //   }
+      doOnlyOnce = !doOnlyOnce; // ... only pay attention to that first reply,
+     /*if (doOnlyOnce)
+      {
+        Serial.println();
+        Serial.println(F("finished playing audio file"));
+        Serial.println();
+        playingAudio = false; //...and tell the system there's NO AUDIO playing.
+       
+      }
+*/
     }
   }
 
@@ -238,6 +257,7 @@ void loop() {
     playingAudio = 0;                 // tell the rest of the system there's no audio playing...
     folderNumber = 0;
     folderOpen = false;               // ...and that there are no folders are active.
+    playing = false;
     currentPhoneState = 0;
     Serial.println();
     Serial.println(F("all folders CLOSED!"));

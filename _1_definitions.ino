@@ -25,6 +25,7 @@
 #define CHECKING_NUMBER 2
 #define RINGING 3
 #define READY_TO_PLAY_FOLDER 4
+#define PLAYING 5
 
 
 /************ MP3 player Serial Command bytes **************************/
@@ -42,10 +43,10 @@
 #define CMD_WAKE_UP       0X0B
 #define CMD_RESET         0X0C
 #define CMD_PLAY          0X0D
-#define CMD_PAUSE         0X0E
+#define CMD_PAUSE      MD_STOP_PLAY   0X0E
 #define CMD_PLAY_FOLDER_FILE 0X0F
 
-#define CMD_STOP_PLAY     0X16
+#define CMD_STOP_PLAY    0X16
 #define CMD_FOLDER_CYCLE  0X17
 #define CMD_SHUFFLE_PLAY  0x18 //
 #define CMD_SET_SNGL_CYCL 0X19 // Set single cycle.
@@ -112,9 +113,6 @@ SoftwareSerial mp3(ARDUINO_RX, ARDUINO_TX);
 
 /*********** Variables for folder trigger/file logic***************/
 
-const byte folderMaxSize  = 5; // max # files allowed in a folder (ie, # of slots in each folder array)
-const int totalNumFolders = 9; // max # of folders
-const int totalNumFiles = 34; // total # files across folders
 
 boolean folderOpen = false; // tracks if ANY folder is open
 byte folderNumber; // allows feedback on which folder is open (for debugging)
@@ -177,18 +175,18 @@ const long phoneNumbers[(totalNumFiles + 1)] = {
 
 
 
-/*
+
 //Variables for folder number, file count per folder
 const byte PROGMEM folder1num = 1;
 const byte PROGMEM folder2num = 2;
-const byte PROGMEM folder3num = 3;
+/*const byte PROGMEM folder3num = 3;
 const byte PROGMEM folder4num = 4;
 const byte PROGMEM folder5num = 5;
 const byte PROGMEM folder6num = 6;
 const byte PROGMEM folder7num = 7;
 const byte PROGMEM folder8num = 8;
 const byte PROGMEM folder9num = 9;
-/*
+
   const byte PROGMEM folder10num = 10;
   const byte PROGMEM folder11num = 11;
   const byte PROGMEM folder12num = 12;
@@ -201,12 +199,12 @@ const byte PROGMEM folder9num = 9;
   const byte PROGMEM folder19num = 19;
   const byte PROGMEM folder20num = 20;
 
-
+*/
 //define number of files in each folder here
 // sets # of files in each folder (up to existing max limit), sends value to instances of "folder" class objects
 byte folder1size;
 byte folder2size;
-byte folder3size;
+/*byte folder3size;
 byte folder4size;
 byte folder5size;
 byte folder6size;
@@ -226,11 +224,12 @@ byte folder9size;
   byte folder19size;
   byte folder20size;
 
+*/
 
 // create variables for array, size, folder state here. Need one for each folder.
 const word PROGMEM folder1array[folderMaxSize];
 const word PROGMEM folder2array[folderMaxSize];
-const word PROGMEM folder3array[folderMaxSize];
+/*const word PROGMEM folder3array[folderMaxSize];
 const word PROGMEM folder4array[folderMaxSize];
 const word PROGMEM folder5array[folderMaxSize];
 const word PROGMEM folder6array[folderMaxSize];
