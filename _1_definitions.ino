@@ -25,7 +25,6 @@
 #define CHECKING_NUMBER 2
 #define RINGING 3
 #define READY_TO_PLAY_FOLDER 4
-#define PLAYING 5
 
 
 /************ MP3 player Serial Command bytes **************************/
@@ -130,46 +129,34 @@ const long phoneNumbers[(totalNumFiles + 1)] = {
   CHARLES_COE_2,
   CHARLES_COE_3,
   CHARLES_COE_4,
-
   JAI_UNDERHILL_JOHNSON_1,
   JAI_UNDERHILL_JOHNSON_2,
   JAI_UNDERHILL_JOHNSON_3,
   JAI_UNDERHILL_JOHNSON_4,
-
   MAUREEN_REEN_1,
   MAUREEN_REEN_2,
   MAUREEN_REEN_3,
   MAUREEN_REEN_4,
-
   MICHAEL_POWELL_1,
   MICHAEL_POWELL_2,
   MICHAEL_POWELL_3,
-
   JOHN_VINES_1,
   JOHN_VINES_2,
   JOHN_VINES_3,
-
   DAVID_DORNEY_1,
   DAVID_DORNEY_2,
   DAVID_DORNEY_3,
   DAVID_DORNEY_4,
-
   TITO_AYALA_SPANISH_1,
   TITO_AYALA_SPANISH_2,
   TITO_AYALA_SPANISH_3,
-  TITO_AYALA_SPANISH_4,
-
-  TITO_AYALA_ENGLISH_1,
-  TITO_AYALA_ENGLISH_2,
-  TITO_AYALA_ENGLISH_3,
-  TITO_AYALA_ENGLISH_4,
-
   OLIVE_KNIGHT_1,
   OLIVE_KNIGHT_2,
   OLIVE_KNIGHT_3,
   OLIVE_KNIGHT_4,
-
+  PROJECT_INTRO,
   DIALNUM_RANDOM
+
 };
 
 
@@ -187,18 +174,6 @@ const byte PROGMEM folder7num = 7;
 const byte PROGMEM folder8num = 8;
 const byte PROGMEM folder9num = 9;
 
-  const byte PROGMEM folder10num = 10;
-  const byte PROGMEM folder11num = 11;
-  const byte PROGMEM folder12num = 12;
-  const byte PROGMEM folder13num = 13;
-  const byte PROGMEM folder14num = 14;
-  const byte PROGMEM folder15num = 15;
-  const byte PROGMEM folder16num = 16;
-  const byte PROGMEM folder17num = 17;
-  const byte PROGMEM folder18num = 18;
-  const byte PROGMEM folder19num = 19;
-  const byte PROGMEM folder20num = 20;
-
 */
 //define number of files in each folder here
 // sets # of files in each folder (up to existing max limit), sends value to instances of "folder" class objects
@@ -211,18 +186,6 @@ byte folder6size;
 byte folder7size;
 byte folder8size;
 byte folder9size;
-/*
-  byte folder10size;
-  byte folder11size;
-  byte folder12size;
-  byte folder13size;
-  byte folder14size;
-  byte folder15size;
-  byte folder16size;
-  byte folder17size;
-  byte folder18size;
-  byte folder19size;
-  byte folder20size;
 
 */
 
@@ -237,17 +200,5 @@ const word PROGMEM folder7array[folderMaxSize];
 const word PROGMEM folder8array[folderMaxSize];
 const word PROGMEM folder9array[folderMaxSize];
 /*
-  const word PROGMEM folder10array[folderMaxSize];
-  const word PROGMEM folder11array[folderMaxSize];
-  const word PROGMEM folder12array[folderMaxSize];
-  const word PROGMEM folder13array[folderMaxSize];
-  const word PROGMEM folder14array[folderMaxSize];
-  const word PROGMEM folder15array[folderMaxSize];
-  const word PROGMEM folder16array[folderMaxSize];
-  const word PROGMEM folder17array[folderMaxSize];
-  const word PROGMEM folder18array[folderMaxSize];
-  const word PROGMEM folder19array[folderMaxSize];
-  const word PROGMEM folder20array[folderMaxSize];
-*/
 
 

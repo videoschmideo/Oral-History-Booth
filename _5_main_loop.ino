@@ -20,7 +20,7 @@ void setup()
   mp3.begin(9600);
   delay(500);
   sendCommand(CMD_SEL_DEV, 0, 0);
-  sendCommand(CMD_SET_VOLUME, 0, 16);
+  sendCommand(CMD_SET_VOLUME, 0, 18);
 
   delay(200);
 
@@ -207,13 +207,13 @@ void loop() {
       currentPhoneState = READY_TO_PLAY_FOLDER;
 
       if (fullNumberSendBuffer == DIALNUM_RANDOM) {
-        int randomPhoneNum = random(0, (totalNumFolders - 1));
+        int randomPhoneNum = random(0, (totalNumFiles - 1));
         fullNumberSendBuffer = phoneNumbers[randomPhoneNum];
         Serial.println(randomPhoneNum);
         Serial.println(fullNumberSendBuffer);
       }
 
-      else if (fullNumberSendBuffer != DIALNUM_RANDOM) {
+       if (fullNumberSendBuffer != DIALNUM_RANDOM) {
         for (int i = 0; i < totalNumFiles; i++) {
           if (fullNumberSendBuffer == phoneNumbers[i]) { // if dialed number is legit...
             folderNumber = 1;     // set folderNumber to this folder (only used when calling "folder" class - sends folder # info to class)
@@ -234,8 +234,8 @@ void loop() {
     decodeMP3Answer(); // decode binary and turn bytes into HEX
     if (ansbuf[3] == 0x3d) // if the HEX code for "file is done" comes in,
     {
-      doOnlyOnce = !doOnlyOnce; // ... only pay attention to that first reply,
-     /*if (doOnlyOnce)
+     /* doOnlyOnce = !doOnlyOnce; // ... only pay attention to that first reply,
+     if (doOnlyOnce)
       {
         Serial.println();
         Serial.println(F("finished playing audio file"));
