@@ -25,7 +25,7 @@ void setup()
   delay(200);
 
   delay (10);
-  for (byte x = 2; x < 4; x++)
+  for (int x = 2; x < 4; x++)
   {
     pinMode(x, INPUT); // set pins on mcp chip as inputs. Uncomment to enable.
     pinMode(x, INPUT_PULLUP); // set input pin to normally low
@@ -97,7 +97,7 @@ void checkNumFilesInfolders() {  // reads SD card, returns number of files in ea
 
   if (initSent == false)  // if memory chest hasn't initialized (sensed # files in each folder)...
   {
-    for (byte i = 1; i <= (totalNumFolders + 1); i++)  // run through all the folders...
+    for (int i = 1; i <= (totalNumFolders + 1); i++)  // run through all the folders...
     {
       sendSingleCommand(CMD_QUERY_FLDR_TRACKS, i);  //...and ask them how many files are inside.
       delay(100); // delay to give mp3 chip time to respond
@@ -119,7 +119,7 @@ void checkNumFilesInfolders() {  // reads SD card, returns number of files in ea
         delay(10);
         mp3.flush();
       }
-      for (byte x = 0; x < (totalNumFolders); x++) {
+      for (int x = 0; x < (totalNumFolders); x++) {
         Serial.print(fileNumArray[x], DEC);
         Serial.print(" ");
       }

@@ -85,7 +85,7 @@ bool lastState = LOW; // compares current state of pulse (high or low) to last s
 long lastStateChangeTime = 0; // debounces dial pulses
 long lastHookStateChangeTime = 0; // debounces hook switch
 bool cleared = 0;
-byte pulses = 0; // counts pulses from rotary dial
+int pulses = 0; // counts pulses from rotary dial
 
 char hookEdge = 1;  // checks edge state of reciever hook
 bool hookIsUp = false;
@@ -94,10 +94,10 @@ bool formerHookState = false;
 String fullNumber = ""; //  holds several previously dialed single numbers in one string
 long fullNumberSendBuffer = 0; // holds full number once numLength reached
 
-byte currentNumber = 0; // holds number just dialed on rotary phone
+int currentNumber = 0; // holds number just dialed on rotary phone
 
-word dialHasFinishedRotatingAfterMs = 100;
-byte debounceDelay = 10;
+int dialHasFinishedRotatingAfterMs = 100;
+int debounceDelay = 10;
 
 
 /****************** variables for Serial MP3 player *****************/
@@ -114,8 +114,8 @@ SoftwareSerial mp3(ARDUINO_RX, ARDUINO_TX);
 
 
 boolean folderOpen = false; // tracks if ANY folder is open
-byte folderNumber; // allows feedback on which folder is open (for debugging)
-byte incomingByte; // incoming byte from mp3 player
+int folderNumber; // allows feedback on which folder is open (for debugging)
+int incomingByte; // incoming byte from mp3 player
 
 
 bool initSent = false; // checks to see if folders initialized
@@ -164,41 +164,41 @@ const long phoneNumbers[(totalNumFiles + 1)] = {
 
 
 //Variables for folder number, file count per folder
-const byte PROGMEM folder1num = 1;
-const byte PROGMEM folder2num = 2;
-/*const byte PROGMEM folder3num = 3;
-const byte PROGMEM folder4num = 4;
-const byte PROGMEM folder5num = 5;
-const byte PROGMEM folder6num = 6;
-const byte PROGMEM folder7num = 7;
-const byte PROGMEM folder8num = 8;
-const byte PROGMEM folder9num = 9;
+int folder1num = 1;
+int folder2num = 2;
+/*int folder3num = 3;
+int folder4num = 4;
+int folder5num = 5;
+int folder6num = 6;
+int folder7num = 7;
+int folder8num = 8;
+int folder9num = 9;
 
 */
 //define number of files in each folder here
 // sets # of files in each folder (up to existing max limit), sends value to instances of "folder" class objects
-byte folder1size;
-byte folder2size;
-/*byte folder3size;
-byte folder4size;
-byte folder5size;
-byte folder6size;
-byte folder7size;
-byte folder8size;
-byte folder9size;
+int folder1size;
+int folder2size;
+/*int folder3size;
+int folder4size;
+int folder5size;
+int folder6size;
+int folder7size;
+int folder8size;
+int folder9size;
 
 */
 
 // create variables for array, size, folder state here. Need one for each folder.
-const word PROGMEM folder1array[folderMaxSize];
-const word PROGMEM folder2array[folderMaxSize];
-/*const word PROGMEM folder3array[folderMaxSize];
-const word PROGMEM folder4array[folderMaxSize];
-const word PROGMEM folder5array[folderMaxSize];
-const word PROGMEM folder6array[folderMaxSize];
-const word PROGMEM folder7array[folderMaxSize];
-const word PROGMEM folder8array[folderMaxSize];
-const word PROGMEM folder9array[folderMaxSize];
+int folder1array[folderMaxSize];
+int folder2array[folderMaxSize];
+/*int folder3array[folderMaxSize];
+int folder4array[folderMaxSize];
+int folder5array[folderMaxSize];
+int folder6array[folderMaxSize];
+int folder7array[folderMaxSize];
+int folder8array[folderMaxSize];
+int folder9array[folderMaxSize];
 /*
 
 

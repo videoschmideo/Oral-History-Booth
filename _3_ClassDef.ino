@@ -10,18 +10,18 @@ class Folder
 
     //  int arrayMaxSize;     // placeholder for max folder array size, as assigned in class def;
     int *arrPass;     // passes folder array pointer between functions
-    byte folderNumber; // keeps track of folder number assigned in class def
+    int folderNumber; // keeps track of folder number assigned in class def
     int folderSize; // tracks size of folders (# files in each)
     
-    byte arraySlot; // keeps track of slots in array (to let us cycle through array incrementally)
+    int arraySlot; // keeps track of slots in array (to let us cycle through array incrementally)
     int buttonCounter; // counts # times folder is opened
 
-    byte fileNumber; // keeps track of current file playing
-    byte num; // number of files in a folder
+    int fileNumber; // keeps track of current file playing
+    int num; // number of files in a folder
     // Constructor - creates a "Drawer" and initializes the member variables and state
 
   public:
-    Folder(int *arrPtr, byte fldrNum, int fldrSize) // defines inputs to class
+    Folder(int *arrPtr, int fldrNum, int fldrSize) // defines inputs to class
     {
       arrPass = arrPtr;
       folderNumber = fldrNum;
@@ -44,18 +44,18 @@ class Folder
     {
       int r;             // placeholder for folder shuffle output
 
-      for (byte a = 0; a < numFiles; a++) {
+      for (int a = 0; a < numFiles; a++) {
         arrPass[a] = a;
       }
 
-      for (byte a = 0; a < numFiles; a++) {
+      for (int a = 0; a < numFiles; a++) {
         r = random(a, numFiles); // random from a to total array number included.
         int temp = arrPass[a];
         arrPass[a] = arrPass[r];
         arrPass[r] = temp;
       }
          Serial.print(F("SHUFFLED! New order: "));
-      for (byte a = 0; a < numFiles; a++) {
+      for (int a = 0; a < numFiles; a++) {
 
              Serial.print(arrPass[a] + 1);
              Serial.print(" ");

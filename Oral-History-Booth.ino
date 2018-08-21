@@ -13,7 +13,7 @@
 ///////////////////////////////////////////////////////
 /*****set "phone numbers" for folders here******///////
 /////////////////////////////////////¨//////////////////
-const byte folderMaxSize  = 50; // max # files allowed in a folder (ie, # of slots in each folder array)
+const int folderMaxSize  = 50; // max # files allowed in a folder (ie, # of slots in each folder array)
 const int totalNumFolders = 2; // max # of folders
 const int totalNumFiles = 30; // total # files across folders
 

@@ -65,7 +65,7 @@ void combinePhoneDigits() {
 
 void readRotaryDial()
 {
-  byte reading = digitalRead(pulsePin);
+  int reading = digitalRead(pulsePin);
   checkHookChanged();
   if (hookIsUp == true) { // only allows dial function when reciver is UP
 
@@ -107,7 +107,7 @@ void readRotaryDial()
 
 
 void wrongNumberChecker() {
-  for (byte x = 0; x < (totalNumFiles + 1); x++) {
+  for (int x = 0; x < (totalNumFiles + 1); x++) {
     if (fullNumberSendBuffer != phoneNumbers[x]) {
       wrongNumber = true;
     } else {
@@ -115,7 +115,7 @@ void wrongNumberChecker() {
       return;
     }
   }
-/// for (byte x = 0; x < (totalNumFiles + 1); x++) {
+/// for (int x = 0; x < (totalNumFiles + 1); x++) {
 //    if (fullNumberSendBuffer = phoneNumbers[x]) {
 //      tempNumBuffer = fullNumberSendBuffer;
 //      
