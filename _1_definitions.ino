@@ -115,7 +115,7 @@ SoftwareSerial mp3(ARDUINO_RX, ARDUINO_TX);
 
 boolean folderOpen = false; // tracks if ANY folder is open
 int folderNumber; // allows feedback on which folder is open (for debugging)
-int incomingByte; // incoming byte from mp3 player
+byte incomingByte; // incoming byte from mp3 player
 
 
 bool initSent = false; // checks to see if folders initialized
